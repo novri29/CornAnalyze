@@ -6,50 +6,56 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.cornanalyze.cornanalyze.databinding.ActivityMainBinding
 import com.cornanalyze.cornanalyze.fragments.HistoryFragment
 import com.cornanalyze.cornanalyze.fragments.HomeFragment
 import com.cornanalyze.cornanalyze.fragments.ScanFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        enableEdgeToEdge()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val bottomNavigation = findViewById<CurvedBottomNavigation>(R.id.bottomNavigation)
-        bottomNavigation.add(
-            CurvedBottomNavigation.Model(1,"Home", R.drawable.baseline_home_24)
-        )
-        bottomNavigation.add(
-            CurvedBottomNavigation.Model(2,"Scan", R.drawable.baseline_home_24)
-        )
-        bottomNavigation.add(
-            CurvedBottomNavigation.Model(3,"History", R.drawable.baseline_home_24)
-        )
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.background = null
 
-        bottomNavigation.setOnClickMenuListener {
-            when(it.id) {
-                1 -> {
-                    replaceFragment(HomeFragment())
-                }
-                2 -> {
-                    replaceFragment(ScanFragment())
-                }
-                3 -> {
-                    replaceFragment(HistoryFragment())
-                }
-            }
+        //ke menu home
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment(), true)
         }
 
-        //default bottom navigation selected
-        replaceFragment(HomeFragment())
-        bottomNavigation.show(1)
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.menu_home -> replaceFragment(HomeFragment(), true)
+                R.id.menu_history -> replaceFragment(HistoryFragment(), true)
+                else -> false
+            }
+        }
+        binding.fab.setOnClickListener {
+            replaceFragment(ScanFragment(), true)
+        }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+    private fun replaceFragment(fragment: Fragment, showBottomNav: Boolean, addToBackStack: Boolean = false): Boolean {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null)
+        }
+        fragmentTransaction.commit()
+
+        if (showBottomNav) {
+            binding.bottomNavigationView.visibility = android.view.View.VISIBLE
+        } else {
+            binding.bottomNavigationView.visibility = android.view.View.GONE
+        }
+        return true
     }
 }
