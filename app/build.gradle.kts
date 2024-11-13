@@ -47,8 +47,20 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.camera.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
+
+    implementation ("com.github.yalantis:ucrop:2.2.6")
+
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation (libs.androidx.camera.core)
+    implementation (libs.androidx.camera.camera2.v133)
+    implementation (libs.androidx.camera.lifecycle.v133)
+    implementation (libs.androidx.camera.view.v133)
+    implementation (libs.androidx.camera.extensions)
 }
