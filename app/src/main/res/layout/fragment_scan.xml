@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,67 +10,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@drawable/rectangle"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
         <TextView
-            android:id="@+id/tv_cornanalyze"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <ImageButton
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Home"
-            android:src="@drawable/ic_settings_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            android:layout_marginTop="48dp"
+            android:text="@string/mari_mendiagnosis"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/previewImageView"
             android:layout_width="330dp"
             android:layout_height="400dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:contentDescription="Image"
-            app:layout_constraintBottom_toTopOf="@+id/galleryButton"
+            app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:srcCompat="@drawable/ic_delete_24" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/iv_scan_image4" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/mengidentifikasi_masalah"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/periksa_tanaman"
+            android:textAlignment="center"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/openCamera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/openCamera"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="0dp"
+            app:backgroundTint="@color/color_pallet1"
             app:layout_constraintBottom_toTopOf="@+id/galleryButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_switch_camera_24" />
+            app:maxImageSize="40dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Fab.Corner"
+            app:srcCompat="@drawable/ic_switch_camera_24"
+            app:strokeColor="@android:color/transparent"
+            app:tint="@android:color/white" />
 
         <Button
             android:id="@+id/galleryButton"
@@ -80,7 +91,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
             android:text="@string/gallery"
-            android:backgroundTint="@color/color1"
+            android:fontFamily="@font/poppins_medium"
+            android:backgroundTint="@color/color_pallet1"
             app:cornerRadius="5dp"
             app:layout_constraintBottom_toTopOf="@+id/analyzeButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/color1"
+            android:fontFamily="@font/poppins_medium"
+            android:backgroundTint="@color/color_pallet1"
             android:text="@string/analyze"
             app:cornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -102,4 +115,4 @@
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</RelativeLayout>

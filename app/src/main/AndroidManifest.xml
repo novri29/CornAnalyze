@@ -3,15 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,6 +32,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CornAnalyze"
         tools:targetApi="31">
+        <activity
+            android:name=".leaf.GrayleafspotLeaf"
+            android:exported="false" />
+        <activity
+            android:name=".leaf.CommonrustLeaf"
+            android:exported="false" />
+        <activity
+            android:name=".leaf.BlightLeaf"
+            android:exported="false" />
+        <activity
+            android:name=".leaf.HealthLeaf"
+            android:exported="false" />
         <activity
             android:name=".CameraActivity"
             android:exported="false" />

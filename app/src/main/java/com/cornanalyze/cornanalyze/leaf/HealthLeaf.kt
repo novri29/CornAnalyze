@@ -1,4 +1,4 @@
-package com.cornanalyze.cornanalyze
+package com.cornanalyze.cornanalyze.leaf
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,31 +10,34 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cornanalyze.cornanalyze.databinding.ActivitySettingBinding
 
-class SettingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
+import com.cornanalyze.cornanalyze.MainActivity
+import com.cornanalyze.cornanalyze.R
+import com.cornanalyze.cornanalyze.databinding.ActivityHealthLeafBinding
+
+class HealthLeaf : AppCompatActivity() {
+    private lateinit var binding: ActivityHealthLeafBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        binding = ActivityHealthLeafBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
         supportActionBar?.apply {
-            title = "CornAnalyze"
+            title = "Healthy"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@SettingActivity, R.color.transparent)))
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@HealthLeaf, R.color.transparent)))
 
-            val textView = TextView(this@SettingActivity).apply {
-                text = getString(R.string.app_name)
+            val textView = TextView(this@HealthLeaf).apply {
+                text = getString(R.string.healthy)
                 setTextColor(Color.BLACK)
                 textSize = 20f
                 typeface = Typeface.DEFAULT_BOLD
             }
             setDisplayShowTitleEnabled(false)
-            setCustomView(textView)
+            customView = textView
             setDisplayShowCustomEnabled(true)
         }
     }
@@ -43,7 +46,7 @@ class SettingActivity : AppCompatActivity() {
         return when(item.itemId){
             android.R.id.home -> {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("navigateTo", "HistoryFragment")
+                intent.putExtra("navigateTo", "HomeFragment")
                 startActivity(intent)
                 finish()
                 true

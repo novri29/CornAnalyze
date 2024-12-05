@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".leaf.CommonrustLeaf"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_healthy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Common Rust"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_delete_24"
+            app:layout_constraintStart_toStartOf="@+id/tv_healthy"
+            app:layout_constraintTop_toBottomOf="@+id/tv_healthy" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="380dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iv_common_rust"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+            <!-- Judul -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:text="Keterangan Daun Common Rust (Karat Daun)"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/long_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="16dp"
+                android:text="Penyakit karat daun (common rust) yang diakibatkan oleh Pucciania sorgi terindikasi dini berbentuk bintik-bintik merah dengan mengeluarkan serbuk semacam tepung bercorak coklat kekuningan. Dengan adanya penyakit ini, tumbuhan jagung tidak bsia melakukan fotosintesis dengan sempurna yang berakibat pertumbuhan menjadi lamat dan dapat meyebabkan tumbuhan mati"
+                android:textSize="16sp" />
+
+            <!-- Faktor -->
+            <TextView
+                android:id="@+id/tv_faktor_commonrust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Faktor Penyebab Karat Daun Pada Jagung :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_faktor_commonrust_isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp"
+                android:text="1. Spora : Spora jamur dapat dipindahkan oleh angin dan hujan ke tanaman lain yang sehat.
+                \n2. Kelembaban : Kelembaban yang tinggi mendukung perkemabngan penyakit ini.
+                \n3. Suhu : Suhu dingin antara 15-20 derajat celcius mendukung perkembangan penyakit ini.
+                \n4. Genetik : Setiap varietas jagung memiliki sifat ketahanan yang berbeda terhadap penyakit ini."
+                android:textSize="16sp" />
+
+            <!-- Gejala -->
+            <TextView
+                android:id="@+id/tv_gejala_commonrust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Gejala Penyakit Karat Daun Jagung :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_gejala_commonrust_isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp"
+                android:text="1. Lesi kecil pada daun yang kemudian melingkar dan memanjang.
+                \n2. Cendawan keluar dari permukaan daun.
+                \n3. Lesi menjadi lebih memanjang dan biasanya terjadi halo kuning.
+                \n4. Bisul (pustul) pada kedua permuakaan daun bagian atas dan bawah dengan warna coklat kemerahan."
+                android:textSize="16sp" />
+
+            <!-- Cara Mengatasi -->
+            <TextView
+                android:id="@+id/tv_mengatasi_commonrust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Cara mengendalikan penyakit karat daun :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_mengatasi_commonrust_isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp"
+                android:text="1. Menanam varietas tahan karat daun jagung yang sehat.
+                \n2. Mengatur jarak tanam untuk menjaga suhu dan kelembaban tanaman.
+                \n3. Menanam di awal musim kemarau.
+                \n4. Menggunakan pestisida kimiawi seperti zineb, oksilorida tembaga, Fermat, dan dithane."
+                android:textSize="16sp" />
+
+            <!-- Sumber -->
+            <TextView
+                android:id="@+id/tv_sumber_commonrust_isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp"
+                android:textColor="#757575"
+                android:text="Sumber :
+                \n1. Jurnal : D. Iswantoro and D. Handayani UN, “Klasifikasi Penyakit Tanaman Jagung Menggunakan Metode Convolutional Neural Network (CNN),” J. Ilm. Univ. Batanghari Jambi, vol. 22, no. 2, p. 900, 2022, doi: 10.33087/jiubj.v22i2.2065.
+                \n2. https://bbpopt.tanamanpangan.pertanian.go.id/artikel/penyakit-karat-daun-tanaman-jagung.
+                \n3. Jurnal : Interaksi Faktor Iklim dan Varietas terhadap Laju Perkembangan Penyakit Karat Daun (Puccinia polysora Undrew) pada Jagung (Zea mays L.) oleh Reymas M.R. Ruimassa, Rosdiana Sari, Eko Agus Martanto.
+                \n4. https://plantix.net/id/library/plant-diseases/100082/common-rust-of-maize/."
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

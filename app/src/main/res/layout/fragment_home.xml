@@ -4,51 +4,368 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.HomeFragment"
+    android:paddingTop="48dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@drawable/rectangle"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+        android:layout_height="match_parent"
+        android:id="@+id/container">
 
         <TextView
             android:id="@+id/tv_cornanalyze"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserratmedium"
             android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <TextView
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Home"
-            android:src="@drawable/ic_settings_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/montserratmedium"
+            android:text="Tanggal"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cornanalyze" />
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/montserratmedium"
+            android:text="Selamat Datang di CornAnaylyze!"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+        <LinearLayout
+            android:id="@+id/btnToScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/gradient_button_home"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_type_disease"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_welcome">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mulai Scan \nSekarang"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="Pelajari Lebih Lanjut"
+                        android:textColor="#FFFFFF"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Arrow"
+                        android:src="@drawable/baseline_arrow_forward_24"
+                        app:tint="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Gambar di samping kanan -->
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Image"
+                android:src="@drawable/ic_button_home" />
+        </LinearLayout>
 
 
+        <TextView
+            android:id="@+id/tv_type_disease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/montserratmedium"
+            android:text="Jenis Daun Tanaman Jagung"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:columnCount="2"
+                android:rowCount="2">
+
+                <!-- Healthy -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/iv_healthy" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Healthy\n(Daun Sehat)"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/btn_healthy" />
+
+                        <ImageButton
+                            android:id="@+id/btn_healthy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_button"
+                            android:contentDescription="@string/next"
+                            android:padding="6dp"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@android:color/white" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <!-- Gray Leaf Spot -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp"> >
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/iv_gray_leaf_spot" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_gray_leaf_spot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gray Leaf Spot\n(Bercak Daun)"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/btn_gray_leaf_spot" />
+
+                        <ImageButton
+                            android:id="@+id/btn_gray_leaf_spot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_button"
+                            android:contentDescription="@string/next"
+                            android:padding="6dp"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@android:color/white" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <!-- Blight -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp"> >
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/iv_blight" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_blight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Blight\n(Hawar Daun)"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/btn_blight" />
+
+                        <ImageButton
+                            android:id="@+id/btn_blight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_button"
+                            android:contentDescription="@string/next"
+                            android:padding="6dp"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@android:color/white" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <!-- Common Rust -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/iv_common_rust" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_common_rust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Common Rust\n(Karat Daun)"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/btn_common_rust" />
+
+                        <ImageButton
+                            android:id="@+id/btn_common_rust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_button"
+                            android:contentDescription="@string/next"
+                            android:padding="6dp"
+                            android:src="@drawable/baseline_arrow_forward_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@android:color/white" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </GridLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".leaf.HealthLeaf"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/tv_healthy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Healthy"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_delete_24"
+            app:layout_constraintStart_toStartOf="@+id/tv_healthy"
+            app:layout_constraintTop_toBottomOf="@+id/tv_healthy" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="380dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iv_healthy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+            <!-- Judul -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:text="Keterangan Daun Jagung Sehat"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Keterangan Panjang -->
+            <TextView
+                android:id="@+id/long_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="16dp"
+                android:text="Daun jagung yang sehat merupakan komponen penting dalam keberhasilan budidaya jagung. Sebagai organ utama untuk proses fotosintesis, daun yang sehat mampu menangkap sinar matahari secara optimal dan mengubahnya menjadi energi yang diperlukan untuk pertumbuhan tanaman. Selain itu, daun yang sehat mencerminkan kondisi tanaman yang bebas dari stres, baik itu akibat lingkungan, serangan hama, maupun penyakit.\n\nDaun yang sehat memiliki kemampuan untuk menjaga proses fisiologis tanaman tetap normal, seperti pengangkutan nutrisi dan air, penguapan, serta pertukaran gas. Hal ini tidak hanya memengaruhi pertumbuhan tanaman, tetapi juga kualitas dan kuantitas hasil panen. Oleh karena itu, perawatan dan pengawasan kondisi daun sangat penting dilakukan, terutama pada fase pertumbuhan vegetatif hingga awal fase reproduktif."
+                android:textSize="16sp" />
+
+            <!-- Ciri-ciri Judul -->
+            <TextView
+                android:id="@+id/characteristics_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="Ciri-Ciri Daun Jagung Sehat:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- List Ciri-ciri -->
+            <TextView
+                android:id="@+id/characteristics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp"
+                android:text="1. Warna hijau yang merata dan pekat.\n2. Struktur simetris dan memanjang.\n3. Permukaan halus, bebas residu dan kerusakan.\n4. Tekstur lentur namun kokoh.\n5. Tulang daun sejajar dan tidak berubah warna.\n6. Bebas bercak penyakit seperti cokelat, kuning, atau abu-abu.\n7. Respon baik terhadap lingkungan, tetap segar meski panas.\n8. Tidak ada hama atau tanda infestasi.\n9. Mampu pulih dari luka kecil tanpa infeksi."
+                android:textSize="16sp" />
+
+            <!-- Catatan -->
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:paddingTop="8dp"
+                android:text="Catatan: Daun jagung yang sehat mencerminkan tanaman dalam kondisi optimal. Perawatan meliputi pemupukan, irigasi, dan pengendalian hama secara teratur sangat penting untuk menjaga kesehatan daun."
+                android:textColor="#757575"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

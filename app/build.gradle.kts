@@ -35,7 +35,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        //noinspection DataBindingWithoutKapt
         dataBinding = true
     }
 }
@@ -48,12 +47,13 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.camera.view)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
 
-    implementation ("com.github.yalantis:ucrop:2.2.6")
+    implementation ("com.github.yalantis:ucrop:2.2.8")
 
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)

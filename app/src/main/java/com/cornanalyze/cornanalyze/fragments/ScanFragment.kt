@@ -24,19 +24,28 @@ import com.yalantis.ucrop.UCrop
 import java.io.File
 
 class ScanFragment : Fragment() {
+
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
     private lateinit var sharedPreferences: SharedPreferences
+
+    // For selecting image from gallery
     private val pickImageGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             startCropActivity(it)
         }
     }
 
+    // Request permissions for camera and storage
     private lateinit var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
+
+    // For camera permission
+    private lateinit var requestCameraPermissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Request multiple permissions (storage)
         requestPermissionsLauncher = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
@@ -53,6 +62,15 @@ class ScanFragment : Fragment() {
                 }
             }
         }
+
+        // Request camera permission
+        requestCameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                openCameraActivity()
+            } else {
+                Toast.makeText(requireContext(), "Camera permission is required", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -65,15 +83,15 @@ class ScanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+
         binding.openCamera.setOnClickListener {
-            openCameraActivity()
+            openCameraWithPermission()
         }
 
         binding.galleryButton.setOnClickListener {
             handleGalleryButtonClicked()
         }
-
-        (activity as? AppCompatActivity)?.supportActionBar?.hide()
 
         binding.previewImageView.post {
             val width = binding.previewImageView.width
@@ -88,11 +106,11 @@ class ScanFragment : Fragment() {
             result.data?.let { data ->
                 val resultUri = UCrop.getOutput(data)
                 resultUri?.let {
-                    // Hapus gambar lama jika ada
+                    // Clear previous image
                     binding.previewImageView.setImageURI(null)
-                    // Gambar baru
+                    // Set the new image
                     binding.previewImageView.setImageURI(resultUri)
-                    binding.previewImageView.invalidate() // Memastikan tampilan di-refresh
+                    binding.previewImageView.invalidate() // Refresh the view
                     binding.analyzeButton.visibility = View.VISIBLE
                 }
             }
@@ -103,14 +121,31 @@ class ScanFragment : Fragment() {
 
     private fun startCropActivity(sourceUri: Uri) {
         val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image.jpg"))
+
+        // Create UCrop options with freestyle cropping enabled
+        val options = UCrop.Options().apply {
+            setCompressionQuality(90) // Optional: Set compression quality for the cropped image
+            setFreeStyleCropEnabled(true) // Enables free-style cropping without a fixed aspect ratio
+        }
+
+        // Create the UCrop intent with the options and start it
         val uCrop = UCrop.of(sourceUri, destinationUri)
-        uCrop.withAspectRatio(1f, 1f) // Optional, set the aspect ratio
-            .withMaxResultSize(1080, 1080) // Optional, set max size
+            .withOptions(options) // Apply the custom options
         cropImageLauncher.launch(uCrop.getIntent(requireContext()))
     }
 
     private fun pickImageFromGallery() {
         pickImageGallery.launch("image/*")
+    }
+
+    private fun openCameraWithPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            // If permission granted, open the camera activity
+            openCameraActivity()
+        } else {
+            // Request camera permission if not granted
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
     }
 
     private fun openCameraActivity() {
@@ -119,10 +154,19 @@ class ScanFragment : Fragment() {
     }
 
     private fun handleGalleryButtonClicked() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissionsIfNeeded(arrayOf(Manifest.permission.READ_MEDIA_IMAGES))
-        } else {
-            requestPermissionsIfNeeded(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE))
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> {
+                // Untuk versi Android 14 (API 34 dan 15 (API 35), langsung akses galeri tanpa perlu minta izin
+                pickImageGallery.launch("image/*")
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                // Untuk versi Android 13 (API 33) keatas)
+                requestPermissionsIfNeeded(arrayOf(Manifest.permission.READ_MEDIA_IMAGES))
+            }
+            else -> {
+                // Untuk versi dibawah Android 13
+                requestPermissionsIfNeeded(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE))
+            }
         }
     }
 
@@ -137,6 +181,7 @@ class ScanFragment : Fragment() {
             pickImageFromGallery()
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

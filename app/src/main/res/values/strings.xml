@@ -7,4 +7,13 @@
     <string name="about_app">Tentang Aplikasi</string>
     <string name="contact">Kontak Kami</string>
     <string name="change_language">Ganti Bahasa</string>
+    <string name="history">History</string>
+    <string name="scan">Scan</string>
+    <string name="home">Home</string>
+    <string name="blight_leaf">Blight Leaf</string>
+    <string name="healthy">Healthy Leaf</string>
+    <string name="next">Next</string>
+    <string name="periksa_tanaman">Periksa tanaman anda, diagnosis penyakit \ndan dapatkan tips mengatasinya!</string>
+    <string name="mengidentifikasi_masalah">Mengidentifikasi masalah tanaman jagung</string>
+    <string name="mari_mendiagnosis">Mari Mendiagnosis</string>
 </resources>

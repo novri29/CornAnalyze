@@ -1,4 +1,4 @@
-package com.cornanalyze.cornanalyze
+package com.cornanalyze.cornanalyze.leaf
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,25 +10,30 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.cornanalyze.cornanalyze.databinding.ActivitySettingBinding
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.cornanalyze.cornanalyze.MainActivity
+import com.cornanalyze.cornanalyze.R
+import com.cornanalyze.cornanalyze.databinding.ActivityBlightLeafBinding
+import com.cornanalyze.cornanalyze.databinding.ActivityGrayleafspotLeafBinding
 
-class SettingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
+class GrayleafspotLeaf : AppCompatActivity() {
+    private lateinit var binding: ActivityGrayleafspotLeafBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        binding = ActivityGrayleafspotLeafBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
         supportActionBar?.apply {
-            title = "CornAnalyze"
+            title = "Gray Leaf Spot"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@SettingActivity, R.color.transparent)))
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@GrayleafspotLeaf, R.color.transparent)))
 
-            val textView = TextView(this@SettingActivity).apply {
-                text = getString(R.string.app_name)
+            val textView = TextView(this@GrayleafspotLeaf).apply {
+                text = getString(R.string.blight_leaf)
                 setTextColor(Color.BLACK)
                 textSize = 20f
                 typeface = Typeface.DEFAULT_BOLD
@@ -43,7 +48,7 @@ class SettingActivity : AppCompatActivity() {
         return when(item.itemId){
             android.R.id.home -> {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("navigateTo", "HistoryFragment")
+                intent.putExtra("navigateTo", "HomeFragment")
                 startActivity(intent)
                 finish()
                 true

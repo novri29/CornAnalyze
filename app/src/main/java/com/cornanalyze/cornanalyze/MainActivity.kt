@@ -23,21 +23,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.background = null
-
-        //ke menu home
-        if (savedInstanceState == null) {
-            replaceFragment(HomeFragment(), true)
-        }
+        handleDirectChangeFragment()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.menu_home -> replaceFragment(HomeFragment(), true)
                 R.id.menu_scan -> replaceFragment(ScanFragment(), true)
                 R.id.menu_history -> replaceFragment(HistoryFragment(), true)
-                else -> false
+                else -> {}
             }
+            true
+        }
+    }
+
+    private  fun handleDirectChangeFragment() {
+        val navigateTo: String? = intent.getStringExtra("navigateTo")
+        if (navigateTo == "HistoryFragment") {
+            replaceFragment(HistoryFragment(), true)
+            binding.bottomNavigationView.selectedItemId = R.id.menu_history
+        } else if(navigateTo == "ScanFragment") {
+            replaceFragment(ScanFragment(), true)
+            binding.bottomNavigationView.selectedItemId = R.id.menu_scan
+        } else {
+            replaceFragment(HomeFragment(), true)
+            binding.bottomNavigationView.selectedItemId = R.id.menu_home
         }
     }
 
@@ -56,5 +65,13 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.visibility = android.view.View.GONE
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

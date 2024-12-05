@@ -3,7 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color1">#419875</color>
-    <color name="green2">#0f8a30</color>
+    <color name="green2">#0F9432</color>
     <color name="color_active">#FF6200EE</color>
     <color name="color_inactive">#B0BEC5</color>
+    <color name="gray">#2A2A2A</color>
+    <color name="transparent">#00000000</color>
+    <color name="color_pallet1">#72BF78</color>
+    <color name="color_pallet2">#A0D683</color>
+    <color name="color_pallet3">#D3EE98</color>
+    <color name="color_pallet4">#FEFF9F</color>
 </resources>
