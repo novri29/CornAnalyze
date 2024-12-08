@@ -1,17 +1,23 @@
 package com.cornanalyze.cornanalyze.fragments
 
 import android.Manifest
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,27 +25,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cornanalyze.cornanalyze.CameraActivity
 import com.cornanalyze.cornanalyze.R
+import com.cornanalyze.cornanalyze.ResultsActivity
 import com.cornanalyze.cornanalyze.databinding.FragmentScanBinding
+import com.cornanalyze.cornanalyze.helper.ImageClassifierHelper
+import com.cornanalyze.cornanalyze.utils.UtilsUCrop
 import com.yalantis.ucrop.UCrop
-import java.io.File
 
+@Suppress("UNREACHABLE_CODE")
 class ScanFragment : Fragment() {
 
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var tfliteModel: ImageClassifierHelper
+    private lateinit var imageView: ImageView
+    private lateinit var analyzeButton: Button
+    private lateinit var predictionText: TextView
+    private lateinit var hasilText: TextView // Tambahkan referensi untuk TextView baru
 
-    // For selecting image from gallery
+    // Pilih gambar dari galeri
     private val pickImageGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             startCropActivity(it)
         }
     }
 
-    // Request permissions for camera and storage
+    // Req permission dari camera dan galeri
     private lateinit var requestPermissionsLauncher: ActivityResultLauncher<Array<String>>
-
-    // For camera permission
+    // permission camera
     private lateinit var requestCameraPermissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +83,7 @@ class ScanFragment : Fragment() {
                 Toast.makeText(requireContext(), "Camera permission is required", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     override fun onCreateView(
@@ -79,11 +92,29 @@ class ScanFragment : Fragment() {
     ): View {
         _binding = FragmentScanBinding.inflate(inflater, container, false)
         return binding.root
+
+        // Inisialisasi elemen UI
+        val imageView = view?.findViewById<ImageView>(R.id.imageView)
+        val analyzeButton = view?.findViewById<Button>(R.id.analyzeButton)
+
+        // Load TensorFlow Lite model
+        tfliteModel = ImageClassifierHelper(requireContext())
+
+        // Atur klik listener
+        analyzeButton?.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+            }
+            imagePickerLauncher.launch(intent)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.supportActionBar?.hide()
+
+        // Inisialisasi tfliteModel
+        tfliteModel = ImageClassifierHelper(requireContext())
 
         binding.openCamera.setOnClickListener {
             openCameraWithPermission()
@@ -91,6 +122,10 @@ class ScanFragment : Fragment() {
 
         binding.galleryButton.setOnClickListener {
             handleGalleryButtonClicked()
+        }
+
+        binding.analyzeButton.setOnClickListener {
+            analyzeImage()
         }
 
         binding.previewImageView.post {
@@ -101,17 +136,60 @@ class ScanFragment : Fragment() {
         }
     }
 
+    private fun analyzeImage() {
+        val drawable = binding.previewImageView.drawable
+        if (drawable == null) {
+            Toast.makeText(requireContext(), "Tidak ada gambar untuk dianalisis!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val bitmap = (drawable as BitmapDrawable).bitmap
+        val prediction = tfliteModel.predictImage(bitmap)
+
+        // Pisahkan hasil prediksi dan saran
+        val predictionLines = prediction.split("\n\nPenanganan:\n")
+        val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
+        val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
+
+        // Pastikan imageUri sudah ada
+        val imageUri = Uri.parse(binding.previewImageView.tag as? String ?: "")
+
+        // Pindah ke ResultsActivity
+        val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
+            putExtra("EXTRA_GAMBAR_URI", imageUri.toString()) // Mengirim URI gambar
+            putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
+            putExtra("EXTRA_SARAN", saranPenanganan)
+        }
+        startActivity(intent)
+    }
+
     private val cropImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             result.data?.let { data ->
                 val resultUri = UCrop.getOutput(data)
-                resultUri?.let {
+                resultUri?.let { uri ->
                     // Clear previous image
                     binding.previewImageView.setImageURI(null)
                     // Set the new image
-                    binding.previewImageView.setImageURI(resultUri)
+                    binding.previewImageView.setImageURI(uri)
                     binding.previewImageView.invalidate() // Refresh the view
                     binding.analyzeButton.visibility = View.VISIBLE
+
+                    // Tambahkan kode untuk analisis dan pindah ke ResultsActivity
+                    val prediction = tfliteModel.predictImage(
+                        BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(uri))
+                    )
+
+                    val predictionLines = prediction.split("\n\nPenanganan:\n")
+                    val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
+                    val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
+
+                    val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
+                        putExtra("EXTRA_GAMBAR_URI", uri.toString())
+                        putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
+                        putExtra("EXTRA_SARAN", saranPenanganan)
+                    }
+                    startActivity(intent)
                 }
             }
         } else {
@@ -120,19 +198,39 @@ class ScanFragment : Fragment() {
     }
 
     private fun startCropActivity(sourceUri: Uri) {
-        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image.jpg"))
-
-        // Create UCrop options with freestyle cropping enabled
-        val options = UCrop.Options().apply {
-            setCompressionQuality(90) // Optional: Set compression quality for the cropped image
-            setFreeStyleCropEnabled(true) // Enables free-style cropping without a fixed aspect ratio
-        }
-
-        // Create the UCrop intent with the options and start it
-        val uCrop = UCrop.of(sourceUri, destinationUri)
-            .withOptions(options) // Apply the custom options
-        cropImageLauncher.launch(uCrop.getIntent(requireContext()))
+        // Ensure the tag is set with the original URI
+        binding.previewImageView.tag = sourceUri.toString()
+        UtilsUCrop.startUCrop(requireContext(), sourceUri, cropImageLauncher)
     }
+
+    private val cameraActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            val croppedImageUri = result.data?.getStringExtra("CROPPED_IMAGE_URI")
+            croppedImageUri?.let {
+                val uri = Uri.parse(it)
+                binding.previewImageView.setImageURI(uri)
+                binding.previewImageView.invalidate() // Refresh view
+                binding.analyzeButton.visibility = View.VISIBLE
+
+                // Menyimpan URI gambar dan mengirimkan data ke ResultsActivity
+                val prediction = tfliteModel.predictImage(BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(uri)))
+
+                val predictionLines = prediction.split("\n\nPenanganan:\n")
+                val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
+                val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
+
+                val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
+                    putExtra("EXTRA_GAMBAR_URI", uri.toString()) // Menambahkan URI gambar
+                    putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
+                    putExtra("EXTRA_SARAN", saranPenanganan)
+                }
+                startActivity(intent)
+            }
+        } else {
+            Toast.makeText(requireContext(), "Failed to capture or crop image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun pickImageFromGallery() {
         pickImageGallery.launch("image/*")
@@ -150,7 +248,7 @@ class ScanFragment : Fragment() {
 
     private fun openCameraActivity() {
         val intent = Intent(requireContext(), CameraActivity::class.java)
-        startActivity(intent)
+        cameraActivityLauncher.launch(intent)
     }
 
     private fun handleGalleryButtonClicked() {
@@ -181,6 +279,38 @@ class ScanFragment : Fragment() {
             pickImageFromGallery()
         }
     }
+
+    private val imagePickerLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { imageUri ->
+                    // Menyimpan URI gambar
+                    val inputStream = requireContext().contentResolver.openInputStream(imageUri)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    imageView.setImageBitmap(bitmap)
+
+                    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
+                    Log.d("MainActivity", "Resized bitmap dimensions: ${resizedBitmap.width}x${resizedBitmap.height}")
+
+                    // Prediksi gambar menggunakan model
+                    val prediction = tfliteModel.predictImage(resizedBitmap)
+
+                    // Pisahkan hasil prediksi dan saran
+                    val predictionLines = prediction.split("\n\nPenanganan:\n")
+                    val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
+                    val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
+
+                    // Pindah ke HasilActivity dengan mengirim data
+                    val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
+                        putExtra("EXTRA_GAMBAR_URI", imageUri.toString()) // Menambahkan URI gambar
+                        putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
+                        putExtra("EXTRA_SARAN", saranPenanganan)
+                    }
+                    startActivity(intent)
+                }
+            }
+        }
+
 
 
     override fun onDestroyView() {
