@@ -1,23 +1,32 @@
 package com.cornanalyze.cornanalyze
 
-import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.cornanalyze.cornanalyze.databinding.ActivityResultsBinding
+import com.cornanalyze.cornanalyze.save.AppDatabase
+import com.cornanalyze.cornanalyze.save.PredictionSave
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class ResultsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityResultsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_results)
+        binding = ActivityResultsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         try {
             // Ambil data dari Intent
@@ -25,58 +34,88 @@ class ResultsActivity : AppCompatActivity() {
             val saranPenanganan = intent.getStringExtra("EXTRA_SARAN") ?: "Saran tidak ditemukan"
             val waktuPemindaian = getCurrentTime()
 
-            // Ambil URI gambar dari Intent
+            // URI gambar
             val imageUriString = intent.getStringExtra("EXTRA_GAMBAR_URI")
+            val imageUri = imageUriString?.let { Uri.parse(it) }
 
-            // Tambahkan log untuk debugging
-            Log.d("ResultsActivity", "Image URI String: $imageUriString")
+            // Menampilkan hasil di UI
+            binding.hasilTextView.text = hasilPrediksi
+            binding.saranTextView.text = saranPenanganan
+            binding.waktuPemindaianTextView.text = waktuPemindaian
 
-            val imageUri: Uri? = if (imageUriString != null) {
+            // Load gambar yang sudah dipotong
+            imageUri?.let {
                 try {
-                    Uri.parse(imageUriString)
-                } catch (e: Exception) {
-                    Log.e("ResultsActivity", "Error parsing URI", e)
-                    null
-                }
-            } else null
-
-            // Temukan TextView dan ImageView di layout
-            val hasilTextView: TextView = findViewById(R.id.hasilTextView)
-            val saranTextView: TextView = findViewById(R.id.saranTextView)
-            val waktuTextView: TextView = findViewById(R.id.waktuPemindaianTextView)
-            val gambarImageView: ImageView = findViewById(R.id.gambarImageView)
-
-            // Set teks ke TextView
-            hasilTextView.text = hasilPrediksi
-            saranTextView.text = saranPenanganan
-            waktuTextView.text = waktuPemindaian
-
-            // Menampilkan gambar jika URI ada
-            imageUri?.let { uri ->
-                try {
-                    val inputStream = contentResolver.openInputStream(uri)
-                    inputStream?.let { stream ->
+                    val inputStream = contentResolver.openInputStream(it)
+                    inputStream?.use { stream ->
                         val bitmap: Bitmap = BitmapFactory.decodeStream(stream)
-                        gambarImageView.setImageBitmap(bitmap)
-                        stream.close()
-                    } ?: throw IllegalArgumentException("Input stream is null")
+                        binding.gambarImageView.setImageBitmap(bitmap)
+                    }
                 } catch (e: Exception) {
                     Log.e("ResultsActivity", "Error loading image", e)
-                    // Optionally, set a default/error image
-                    gambarImageView.setImageResource(android.R.drawable.ic_menu_gallery)
+                    binding.gambarImageView.setImageResource(android.R.drawable.ic_menu_gallery)
+                }
+            }
+
+            // Tombol simpan
+            binding.save.setOnClickListener {
+                if (imageUri != null && hasilPrediksi.isNotEmpty()) {
+                    // Simpan gambar yang sudah dipotong
+                    val croppedImageUri = saveBitmapToInternalStorage(BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri)))
+                    savePredictionToDatabase(croppedImageUri, hasilPrediksi)
+                } else {
+                    showToast("Gambar atau hasil prediksi tidak valid!")
                 }
             }
         } catch (e: Exception) {
-            Log.e("ResultsActivity", "Unexpected error", e)
-            // Handle any unexpected errors
-            Toast.makeText(this, "Error loading results", Toast.LENGTH_SHORT).show()
+            Log.e("ResultsActivity", "Error in onCreate", e)
+            Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Fungsi untuk mendapatkan waktu saat ini
     private fun getCurrentTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val date = Date()
-        return dateFormat.format(date)
+        return dateFormat.format(Date())
+    }
+
+    private fun savePredictionToDatabase(imageUri: Uri, result: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Simpan URI gambar yang sudah dipotong
+                val prediction = PredictionSave(imagePath = imageUri.toString(), result = result)
+                val database = AppDatabase.getDatabase(applicationContext)
+                database.predictionSaveDao().insertPrediction(prediction)
+                Log.d("ResultsActivity", "Prediction saved: $prediction")
+
+                val allPredictions = database.predictionSaveDao().getALLPrediction()
+                Log.d("ResultsActivity", "All predictions: $allPredictions")
+
+                showToast("Data berhasil disimpan!")
+            } catch (e: Exception) {
+                Log.e("ResultsActivity", "Failed to save prediction", e)
+                showToast("Gagal menyimpan data.")
+            }
+        }
+    }
+
+    private fun saveBitmapToInternalStorage(bitmap: Bitmap): Uri {
+        val fileName = "cropped_image_${System.currentTimeMillis()}.jpg"
+        val file = File(filesDir, fileName)
+        try {
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+            return Uri.fromFile(file)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving image", e)
+            return Uri.EMPTY
+        }
+    }
+
+    private fun showToast(message: String) {
+        runOnUiThread {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

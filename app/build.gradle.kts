@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("com.google.devtools.ksp") version "2.0.21-1.0.27"
 }
 
 android {
@@ -68,4 +69,10 @@ dependencies {
 
     implementation ("org.tensorflow:tensorflow-lite:2.13.0")
     implementation ("org.tensorflow:tensorflow-lite-support:0.4.4")
+
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 }

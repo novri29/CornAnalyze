@@ -172,24 +172,9 @@ class ScanFragment : Fragment() {
                     binding.previewImageView.setImageURI(null)
                     // Set the new image
                     binding.previewImageView.setImageURI(uri)
+                    binding.previewImageView.tag = uri.toString() // Simpan URI untuk digunakan nanti
                     binding.previewImageView.invalidate() // Refresh the view
-                    binding.analyzeButton.visibility = View.VISIBLE
-
-                    // Tambahkan kode untuk analisis dan pindah ke ResultsActivity
-                    val prediction = tfliteModel.predictImage(
-                        BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(uri))
-                    )
-
-                    val predictionLines = prediction.split("\n\nPenanganan:\n")
-                    val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
-                    val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
-
-                    val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
-                        putExtra("EXTRA_GAMBAR_URI", uri.toString())
-                        putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
-                        putExtra("EXTRA_SARAN", saranPenanganan)
-                    }
-                    startActivity(intent)
+                    binding.analyzeButton.visibility = View.VISIBLE // Aktifkan tombol Analisis
                 }
             }
         } else {
@@ -209,22 +194,9 @@ class ScanFragment : Fragment() {
             croppedImageUri?.let {
                 val uri = Uri.parse(it)
                 binding.previewImageView.setImageURI(uri)
+                binding.previewImageView.tag = uri.toString() // Simpan URI untuk digunakan nanti
                 binding.previewImageView.invalidate() // Refresh view
-                binding.analyzeButton.visibility = View.VISIBLE
-
-                // Menyimpan URI gambar dan mengirimkan data ke ResultsActivity
-                val prediction = tfliteModel.predictImage(BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(uri)))
-
-                val predictionLines = prediction.split("\n\nPenanganan:\n")
-                val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
-                val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
-
-                val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
-                    putExtra("EXTRA_GAMBAR_URI", uri.toString()) // Menambahkan URI gambar
-                    putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
-                    putExtra("EXTRA_SARAN", saranPenanganan)
-                }
-                startActivity(intent)
+                binding.analyzeButton.visibility = View.VISIBLE // Aktifkan tombol Analisis
             }
         } else {
             Toast.makeText(requireContext(), "Failed to capture or crop image", Toast.LENGTH_SHORT).show()
@@ -287,30 +259,16 @@ class ScanFragment : Fragment() {
                     // Menyimpan URI gambar
                     val inputStream = requireContext().contentResolver.openInputStream(imageUri)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    imageView.setImageBitmap(bitmap)
+                    binding.previewImageView.setImageBitmap(bitmap)
+                    binding.previewImageView.tag = imageUri.toString() // Simpan URI untuk digunakan nanti
 
                     val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
-                    Log.d("MainActivity", "Resized bitmap dimensions: ${resizedBitmap.width}x${resizedBitmap.height}")
+                    Log.d("ScanFragment", "Resized bitmap dimensions: ${resizedBitmap.width}x${resizedBitmap.height}")
 
-                    // Prediksi gambar menggunakan model
-                    val prediction = tfliteModel.predictImage(resizedBitmap)
-
-                    // Pisahkan hasil prediksi dan saran
-                    val predictionLines = prediction.split("\n\nPenanganan:\n")
-                    val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
-                    val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
-
-                    // Pindah ke HasilActivity dengan mengirim data
-                    val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
-                        putExtra("EXTRA_GAMBAR_URI", imageUri.toString()) // Menambahkan URI gambar
-                        putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
-                        putExtra("EXTRA_SARAN", saranPenanganan)
-                    }
-                    startActivity(intent)
+                    binding.analyzeButton.visibility = View.VISIBLE // Aktifkan tombol Analisis
                 }
             }
         }
-
 
 
     override fun onDestroyView() {

@@ -3,27 +3,45 @@ package com.cornanalyze.cornanalyze.fragments
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.cornanalyze.cornanalyze.R
 import com.cornanalyze.cornanalyze.SettingActivity
+import com.cornanalyze.cornanalyze.adapter.SavePredictionAdapter
 import com.cornanalyze.cornanalyze.databinding.FragmentHistoryBinding
+import com.cornanalyze.cornanalyze.save.AppDatabase
+import com.cornanalyze.cornanalyze.save.PredictionSave
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), SavePredictionAdapter.OnDeleteClickListener {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sharedPreferences: SharedPreferences
+
+    private lateinit var savePredictionAdapter: SavePredictionAdapter
+    private var savepredictionList: MutableList<PredictionSave> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        return binding.root
+
+        savePredictionAdapter = SavePredictionAdapter(savepredictionList)
+        savePredictionAdapter.setOnDeleteClickListener(this)
+
+        binding.rvHistory.adapter = savePredictionAdapter
+        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
+
+        return binding.root // Pastikan mengembalikan root view binding
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,10 +51,44 @@ class HistoryFragment : Fragment() {
         binding.btnSetting.setOnClickListener {
             openSettingMenus()
         }
+
+        // Panggil loadPredictionHistoryFromDatabase saat fragment siap
+        loadPredictionHistoryFromDatabase()
+    }
+
+    private fun loadPredictionHistoryFromDatabase() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val predictions = AppDatabase.getDatabase(requireContext()).predictionSaveDao().getALLPrediction()
+            Log.d(TAG, "Number of predictions: ${predictions.size}")
+            savepredictionList.clear()
+            savepredictionList.addAll(predictions)
+            savePredictionAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun openSettingMenus() {
         val intent = Intent(requireContext(), SettingActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onDeleteClick(position: Int) {
+        val prediction = savepredictionList[position]
+        if (prediction.result.isNotEmpty()) {
+            GlobalScope.launch(Dispatchers.IO) {
+                AppDatabase.getDatabase(requireContext()).predictionSaveDao().deletePrediction(prediction)
+            }
+            savepredictionList.removeAt(position)
+            savePredictionAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Hapus binding saat view dihancurkan
+    }
+
+    companion object {
+        const val TAG = "historydata"
+        private const val REQUEST_HISTORY_UPDATE = 1
     }
 }
