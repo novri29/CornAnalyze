@@ -146,22 +146,25 @@ class ScanFragment : Fragment() {
         val bitmap = (drawable as BitmapDrawable).bitmap
         val prediction = tfliteModel.predictImage(bitmap)
 
-        // Pisahkan hasil prediksi dan saran
-        val predictionLines = prediction.split("\n\nPenanganan:\n")
-        val hasilPrediksi = predictionLines.getOrNull(0) ?: "Hasil tidak diketahui"
-        val saranPenanganan = predictionLines.getOrNull(1) ?: "Saran tidak tersedia"
+        // Mendapatkan hasil prediksi
+        val label = prediction.label
+        val probability = prediction.probability
+        val description = prediction.description
+        val handling = prediction.handling
 
         // Pastikan imageUri sudah ada
         val imageUri = Uri.parse(binding.previewImageView.tag as? String ?: "")
 
         // Pindah ke ResultsActivity
         val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
-            putExtra("EXTRA_GAMBAR_URI", imageUri.toString()) // Mengirim URI gambar
-            putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
-            putExtra("EXTRA_SARAN", saranPenanganan)
+            putExtra("EXTRA_GAMBAR_URI", imageUri.toString())
+            putExtra("EXTRA_HASIL_PREDIKSI", "$label ($probability%)")
+            putExtra("EXTRA_DESKRIPSI", description)
+            putExtra("EXTRA_SARAN", handling)
         }
         startActivity(intent)
     }
+
 
     private val cropImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {

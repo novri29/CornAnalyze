@@ -11,7 +11,7 @@ interface PredictionSaveDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrediction(prediction: PredictionSave)
 
-    @Query("SELECT * FROM save_prediction")
+    @Query("SELECT * FROM save_prediction ORDER BY id DESC")
     suspend fun getALLPrediction(): List<PredictionSave>
 
     @Delete

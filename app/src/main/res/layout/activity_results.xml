@@ -3,60 +3,106 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Gambar hasil pemindaian -->
+    <ImageView
+        android:id="@+id/gambarImageView"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:contentDescription="Gambar yang dipindai"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/prediksi"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/prediksi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Prediksi :"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gambarImageView" />
 
     <!-- Teks untuk hasil prediksi -->
     <TextView
         android:id="@+id/hasilTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Hasil prediksi akan muncul di sini"
         android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prediksi" />
+
+    <!-- Teks untuk deskripsi -->
+    <TextView
+        android:id="@+id/deskripsi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Deksripsi :"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hasilTextView" />
+
+    <TextView
+        android:id="@+id/deskripsiTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi akan muncul di sini"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deskripsi" />
 
     <!-- Teks untuk saran -->
     <TextView
         android:id="@+id/saranTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Saran akan muncul di sini"
         android:textSize="16sp"
+        android:textColor="@android:color/black"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/hasilTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deskripsiTextView" />
 
+    <!-- Teks untuk waktu pemindaian -->
     <TextView
         android:id="@+id/waktuPemindaianTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Waktu Pemindaian"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saranTextView" />
 
-    <ImageView
-        android:id="@+id/gambarImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="Gambar yang dipindai"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waktuPemindaianTextView" />
-
+    <!-- Tombol Simpan -->
     <Button
         android:id="@+id/save"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color1"
         android:text="SIMPAN"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/color1"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gambarImageView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waktuPemindaianTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

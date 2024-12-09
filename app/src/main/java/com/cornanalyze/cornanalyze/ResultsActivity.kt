@@ -32,6 +32,7 @@ class ResultsActivity : AppCompatActivity() {
             // Ambil data dari Intent
             val hasilPrediksi = intent.getStringExtra("EXTRA_HASIL_PREDIKSI") ?: "Hasil tidak ditemukan"
             val saranPenanganan = intent.getStringExtra("EXTRA_SARAN") ?: "Saran tidak ditemukan"
+            val deskripsiPenyakit = intent.getStringExtra("EXTRA_DESKRIPSI") ?: "Deskripsi tidak tersedia"
             val waktuPemindaian = getCurrentTime()
 
             // URI gambar
@@ -40,6 +41,7 @@ class ResultsActivity : AppCompatActivity() {
 
             // Menampilkan hasil di UI
             binding.hasilTextView.text = hasilPrediksi
+            binding.deskripsiTextView.text = deskripsiPenyakit
             binding.saranTextView.text = saranPenanganan
             binding.waktuPemindaianTextView.text = waktuPemindaian
 

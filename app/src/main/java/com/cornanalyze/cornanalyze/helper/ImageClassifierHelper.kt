@@ -17,6 +17,13 @@ class ImageClassifierHelper(context: Context) {
         interpreter = Interpreter(loadModelFile(context, "CornLeafDisease7030V2.tflite"))
     }
 
+    data class PredictionResult(
+        val label: String,
+        val probability: Int,
+        val description: String,
+        val handling: String
+    )
+
     @Throws(IOException::class)
     private fun loadModelFile(context: Context, modelPath: String): MappedByteBuffer {
         val assetFileDescriptor = context.assets.openFd(modelPath)
@@ -27,7 +34,7 @@ class ImageClassifierHelper(context: Context) {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    fun predictImage(bitmap: Bitmap): String {
+    fun predictImage(bitmap: Bitmap): PredictionResult {
         // Mengubah ukuran gambar ke 256x256
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
 
@@ -40,9 +47,6 @@ class ImageClassifierHelper(context: Context) {
         // Membuat TensorBuffer input dengan ukuran sesuai model
         val inputBuffer = TensorBuffer.createFixedSize(intArrayOf(1, 256, 256, 3), org.tensorflow.lite.DataType.FLOAT32)
         inputBuffer.loadArray(normalizedArray)
-
-        // Debugging input buffer
-        Log.d("TFLiteModel", "Input Buffer: ${normalizedArray.joinToString(", ", "[", "]")}")
 
         // Memeriksa ukuran output tensor
         val outputTensor = interpreter.getOutputTensor(0)
@@ -59,23 +63,31 @@ class ImageClassifierHelper(context: Context) {
         // Mendapatkan hasil prediksi
         val predictions = outputBuffer.floatArray
 
-        // Debugging output buffer
-        predictions.forEachIndexed { index, value ->
-            Log.d("TFLiteModel", "Label ${index}: ${value}")
-        }
-
         // Menentukan label berdasarkan prediksi tertinggi
-        val labels = listOf("Blight", "Common_Rust", "Gray_Leaf_Spot", "Healthy")
+        val labels = listOf("Blight", "Common Rust", "Gray Leaf Spot", "Healthy")
         val maxIndex = predictions.indices.maxByOrNull { predictions[it] } ?: -1
 
         if (maxIndex != -1) {
             val label = labels[maxIndex]
             val probability = (predictions[maxIndex] * 100).toInt()
+
+            val description = if (label == "Blight") {
+                "Penyakit ini disebabkan oleh bakteri atau jamur yang menyebabkan bercak cokelat berbentuk lonjong pada daun, terutama pada kondisi lembap."
+            } else if (label == "Common Rust") {
+                "Penyakit ini disebabkan oleh jamur Puccinia sorghi yang menyebabkan pustula cokelat kemerahan pada daun."
+            } else if (label == "Gray Leaf Spot") {
+                "Penyakit ini disebabkan oleh jamur Cercospora zeae-maydis yang menyebabkan bercak persegi panjang berwarna abu-abu hingga cokelat pada daun."
+            } else if (label == "Healthy") {
+                "Tanaman dalam kondisi sehat tanpa tanda-tanda penyakit atau kerusakan. Tanaman dapat berproduksi optimal."
+            } else {
+                "Tidak ada deskripsi tersedia."
+            }
+
             val handling = if (label == "Blight") {
                 "1. Gunakan fungisida berbasis tembaga.\n2. Pastikan drainase lahan baik untuk mengurangi kelembapan.\n3. Hindari irigasi di malam hari."
-            } else if (label == "Common_Rust") {
+            } else if (label == "Common Rust") {
                 "1. Terapkan fungisida berbasis mankozeb atau klorotalonil.\n2. Pilih varietas jagung yang tahan karat.\n3. Hindari penanaman terlalu padat."
-            } else if (label == "Gray_Leaf_Spot") {
+            } else if (label == "Gray Leaf Spot") {
                 "1. Gunakan fungisida strobilurin atau triazole.\n2. Lakukan rotasi tanaman untuk mengurangi inokulum.\n3. Hindari sisa tanaman tertinggal di lahan."
             } else if (label == "Healthy") {
                 "Tanaman sehat. Lanjutkan perawatan rutin dan pastikan kondisi optimal untuk pertumbuhan."
@@ -83,10 +95,10 @@ class ImageClassifierHelper(context: Context) {
                 "Tidak ada langkah penanganan spesifik."
             }
 
-            return "$label (Probabilitas: ${probability}%)\n\nPenanganan:\n$handling"
+            return PredictionResult(label, probability, description, handling)
         }
 
-        return "Unknown"
+        return PredictionResult("Unknown", 0, "Tidak ada informasi tersedia.", "Tidak ada langkah penanganan.")
     }
 
 
