@@ -38,6 +38,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cornanalyze" />
 
+        <ImageButton
+            android:id="@+id/btn_qustion"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Question"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_questionn"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_cornanalyze" />
+
         <TextView
             android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"

@@ -16,7 +16,8 @@
             android:id="@+id/tv_healthy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Healthy"
+            android:text="@string/healthy_title"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -25,10 +26,11 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_delete_24"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_logo"
+            android:background="@drawable/rounded_corner"
             app:layout_constraintStart_toStartOf="@+id/tv_healthy"
             app:layout_constraintTop_toBottomOf="@+id/tv_healthy" />
 
@@ -40,17 +42,17 @@
             android:layout_marginBottom="5dp"
             android:text="@string/app_name"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="380dp"
             android:layout_height="300dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_corner"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
@@ -76,10 +78,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
-                android:text="Keterangan Daun Jagung Sehat"
+                android:text="@string/keterangan_daun_jagung_sehat"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <!-- Keterangan Panjang -->
             <TextView
@@ -88,27 +91,30 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="16dp"
-                android:text="Daun jagung yang sehat merupakan komponen penting dalam keberhasilan budidaya jagung. Sebagai organ utama untuk proses fotosintesis, daun yang sehat mampu menangkap sinar matahari secara optimal dan mengubahnya menjadi energi yang diperlukan untuk pertumbuhan tanaman. Selain itu, daun yang sehat mencerminkan kondisi tanaman yang bebas dari stres, baik itu akibat lingkungan, serangan hama, maupun penyakit.\n\nDaun yang sehat memiliki kemampuan untuk menjaga proses fisiologis tanaman tetap normal, seperti pengangkutan nutrisi dan air, penguapan, serta pertukaran gas. Hal ini tidak hanya memengaruhi pertumbuhan tanaman, tetapi juga kualitas dan kuantitas hasil panen. Oleh karena itu, perawatan dan pengawasan kondisi daun sangat penting dilakukan, terutama pada fase pertumbuhan vegetatif hingga awal fase reproduktif."
-                android:textSize="16sp" />
+                android:text="@string/deskripsi_healthy"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular" />
 
             <!-- Ciri-ciri Judul -->
             <TextView
-                android:id="@+id/characteristics_title"
+                android:id="@+id/ciri_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
-                android:text="Ciri-Ciri Daun Jagung Sehat:"
-                android:textSize="18sp"
+                android:text="@string/ciri_ciri_daun_jagung_sehat"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <!-- List Ciri-ciri -->
             <TextView
-                android:id="@+id/characteristics"
+                android:id="@+id/ciri_healthy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
-                android:text="1. Warna hijau yang merata dan pekat.\n2. Struktur simetris dan memanjang.\n3. Permukaan halus, bebas residu dan kerusakan.\n4. Tekstur lentur namun kokoh.\n5. Tulang daun sejajar dan tidak berubah warna.\n6. Bebas bercak penyakit seperti cokelat, kuning, atau abu-abu.\n7. Respon baik terhadap lingkungan, tetap segar meski panas.\n8. Tidak ada hama atau tanda infestasi.\n9. Mampu pulih dari luka kecil tanpa infeksi."
+                android:text="@string/ciri_healthy"
                 android:textSize="16sp" />
 
             <!-- Catatan -->
@@ -118,8 +124,9 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:paddingTop="8dp"
-                android:text="Catatan: Daun jagung yang sehat mencerminkan tanaman dalam kondisi optimal. Perawatan meliputi pemupukan, irigasi, dan pengendalian hama secara teratur sangat penting untuk menjaga kesehatan daun."
+                android:text="@string/sumber_healthy"
                 android:textColor="#757575"
+                android:fontFamily="@font/poppins_medium"
                 android:textSize="14sp" />
 
         </LinearLayout>

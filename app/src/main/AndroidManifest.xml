@@ -33,6 +33,9 @@
         android:theme="@style/Theme.CornAnalyze"
         tools:targetApi="31">
         <activity
+            android:name=".TutorialActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultsActivity"
             android:exported="false" />
         <activity

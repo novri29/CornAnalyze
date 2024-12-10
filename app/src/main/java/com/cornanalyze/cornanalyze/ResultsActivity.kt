@@ -62,9 +62,14 @@ class ResultsActivity : AppCompatActivity() {
             // Tombol simpan
             binding.save.setOnClickListener {
                 if (imageUri != null && hasilPrediksi.isNotEmpty()) {
-                    // Simpan gambar yang sudah dipotong
                     val croppedImageUri = saveBitmapToInternalStorage(BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri)))
-                    savePredictionToDatabase(croppedImageUri, hasilPrediksi)
+                    savePredictionToDatabase(
+                        croppedImageUri,
+                        hasilPrediksi,
+                        deskripsiPenyakit,
+                        saranPenanganan,
+                        waktuPemindaian
+                    )
                 } else {
                     showToast("Gambar atau hasil prediksi tidak valid!")
                 }
@@ -80,11 +85,17 @@ class ResultsActivity : AppCompatActivity() {
         return dateFormat.format(Date())
     }
 
-    private fun savePredictionToDatabase(imageUri: Uri, result: String) {
+    private fun savePredictionToDatabase(imageUri: Uri, result: String, description: String, advice: String, date: String) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Simpan URI gambar yang sudah dipotong
-                val prediction = PredictionSave(imagePath = imageUri.toString(), result = result)
+                // Membuat entitas PredictionSave
+                val prediction = PredictionSave(
+                    imagePath = imageUri.toString(),
+                    result = result,
+                    description = description,
+                    advice = advice,
+                    date = date
+                )
                 val database = AppDatabase.getDatabase(applicationContext)
                 database.predictionSaveDao().insertPrediction(prediction)
                 Log.d("ResultsActivity", "Prediction saved: $prediction")

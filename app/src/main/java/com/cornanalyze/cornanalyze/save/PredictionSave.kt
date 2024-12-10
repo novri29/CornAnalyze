@@ -9,4 +9,7 @@ data class PredictionSave(
     val id: Long = 0,
     val imagePath: String,
     val result: String,
+    val description: String,
+    val advice: String,
+    val date: String
 )

@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.cornanalyze.cornanalyze.MainActivity
+import com.cornanalyze.cornanalyze.TutorialActivity
 import com.cornanalyze.cornanalyze.databinding.FragmentHomeBinding
 import com.cornanalyze.cornanalyze.leaf.BlightLeaf
 import com.cornanalyze.cornanalyze.leaf.CommonrustLeaf
@@ -41,9 +42,7 @@ class HomeFragment : Fragment() {
         // Mendapatkan tanggal saat ini
         val currentDate = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(Date())
 
-        // Menampilkan tanggal di TextView
         binding.tvDate.text = currentDate
-
         val layouthealth: ImageButton = binding.btnHealthy
         layouthealth.setOnClickListener {
             val intent = Intent(requireContext(), HealthLeaf::class.java)
@@ -62,6 +61,11 @@ class HomeFragment : Fragment() {
         val layoutcommonrust: ImageButton = binding.btnCommonRust
         layoutcommonrust.setOnClickListener {
             val intent = Intent(requireContext(), CommonrustLeaf::class.java)
+            startActivity(intent)
+        }
+        val layoutquestion: ImageButton = binding.btnQustion
+        layoutquestion.setOnClickListener {
+            val intent = Intent(requireContext(), TutorialActivity::class.java)
             startActivity(intent)
         }
 

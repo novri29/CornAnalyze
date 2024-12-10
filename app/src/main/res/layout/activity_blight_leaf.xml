@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="16dp"
-                android:text="Penyakit hawar (blight) jagung merupakan penyakit yang banyak menyebar di Amerika, Asia, Afrika, dan juga Eropa, kerugian apabila tanaman jagung terkena penyakit hawar dapat mencapai 50%. Penyakit hawar jagung terindikasi berbentuk bercak kecil yang berbentuk oval, yang kemudian bercak tersebut menjadi memanjang seperti ellips serta tumbuh menjadi nekrotik."
+                android:text="Lorem Lorem Lorem Lorem Lorem Lorem Penyakit hawar (blight) jagung merupakan penyakit yang banyak menyebar di Amerika, Asia, Afrika, dan juga Eropa, kerugian apabila tanaman jagung terkena penyakit hawar dapat mencapai 50%. Penyakit hawar jagung terindikasi berbentuk bercak kecil yang berbentuk oval, yang kemudian bercak tersebut menjadi memanjang seperti ellips serta tumbuh menjadi nekrotik."
                 android:textSize="16sp" />
 
             <!-- Faktor -->
