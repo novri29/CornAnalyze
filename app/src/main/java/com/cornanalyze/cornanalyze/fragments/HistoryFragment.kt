@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cornanalyze.cornanalyze.DetailActivity
 import com.cornanalyze.cornanalyze.R
 import com.cornanalyze.cornanalyze.SettingActivity
 import com.cornanalyze.cornanalyze.adapter.SavePredictionAdapter
@@ -37,6 +38,13 @@ class HistoryFragment : Fragment(), SavePredictionAdapter.OnDeleteClickListener 
 
         savePredictionAdapter = SavePredictionAdapter(savepredictionList)
         savePredictionAdapter.setOnDeleteClickListener(this)
+
+        savePredictionAdapter.setOnItemClickListener { prediction ->
+            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                putExtra("ID_PREDICTION", prediction.id)
+            }
+            startActivity(intent)
+        }
 
         binding.rvHistory.adapter = savePredictionAdapter
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())

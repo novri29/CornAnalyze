@@ -16,4 +16,7 @@ interface PredictionSaveDAO {
 
     @Delete
     suspend fun deletePrediction(prediction: PredictionSave)
+
+    @Query("SELECT * FROM save_prediction WHERE id = :id LIMIT 1")
+    suspend fun getPredictionById(id: Long): PredictionSave?
 }

@@ -5,11 +5,14 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 
 import com.cornanalyze.cornanalyze.MainActivity
 import com.cornanalyze.cornanalyze.R
@@ -27,14 +30,21 @@ class HealthLeaf : AppCompatActivity() {
             title = "Healthy"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
             setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@HealthLeaf, R.color.transparent)))
 
             val textView = TextView(this@HealthLeaf).apply {
                 text = getString(R.string.healthy)
                 setTextColor(Color.BLACK)
                 textSize = 20f
-                typeface = Typeface.DEFAULT_BOLD
+                typeface = ResourcesCompat.getFont(this@HealthLeaf, R.font.poppins_medium)
+
+                // Tambahkan pengaturan untuk membuat teks di tengah
+                layoutParams = ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER
+                )
             }
             setDisplayShowTitleEnabled(false)
             customView = textView

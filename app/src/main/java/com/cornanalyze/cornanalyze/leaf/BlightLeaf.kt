@@ -33,14 +33,14 @@ class BlightLeaf : AppCompatActivity() {
             title = "Blight Leaf"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
             setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@BlightLeaf, R.color.transparent)))
 
             val textView = TextView(this@BlightLeaf).apply {
                 text = getString(R.string.blight_leaf)
                 setTextColor(Color.BLACK)
                 textSize = 20f
-                typeface = ResourcesCompat.getFont(this@BlightLeaf, R.font.montserratmedium)
+                typeface = ResourcesCompat.getFont(this@BlightLeaf, R.font.poppins_medium)
 
                 // Tambahkan pengaturan untuk membuat teks di tengah
                 layoutParams = ActionBar.LayoutParams(

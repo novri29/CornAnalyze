@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.cornanalyze.cornanalyze.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {
@@ -24,14 +25,14 @@ class SettingActivity : AppCompatActivity() {
             title = "CornAnalyze"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
             setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@SettingActivity, R.color.transparent)))
 
             val textView = TextView(this@SettingActivity).apply {
                 text = getString(R.string.app_name)
                 setTextColor(Color.BLACK)
                 textSize = 20f
-                typeface = Typeface.DEFAULT_BOLD
+                typeface = ResourcesCompat.getFont(this@SettingActivity, R.font.poppins_medium)
             }
             setDisplayShowTitleEnabled(false)
             setCustomView(textView)

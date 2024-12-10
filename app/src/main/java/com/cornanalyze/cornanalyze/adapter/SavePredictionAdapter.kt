@@ -14,10 +14,15 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
         RecyclerView.Adapter<SavePredictionAdapter.ViewHolder>() {
 
     private var onDeleteClickListener: OnDeleteClickListener? = null
+    private var onItemClickListener: ((PredictionSave) -> Unit)? = null
 
     interface OnDeleteClickListener {
         fun onDeleteClick(position: Int)
     }
+
+    fun setOnItemClickListener(listener: (PredictionSave) -> Unit) {
+        onItemClickListener = listener
+    } // Item klik untuk melihat detail prediksi.
 
     fun setOnDeleteClickListener(listener: OnDeleteClickListener) {
         onDeleteClickListener = listener
@@ -57,6 +62,10 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
             resultTextView.text = prediction.result // Tetapkan hasil prediksi.
             deleteButton.setOnClickListener {
                 onDeleteClickListener?.onDeleteClick(adapterPosition) // Trigger event delete.
+            }
+
+            itemView.setOnClickListener {
+                onItemClickListener?.invoke(prediction)
             }
         }
 
