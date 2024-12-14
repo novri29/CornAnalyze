@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.hide()
 
         // Mendapatkan tanggal saat ini
-        val currentDate = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(Date())
+        val currentDate = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID")).format(Date())
 
         binding.tvDate.text = currentDate
         val layouthealth: ImageButton = binding.btnHealthy

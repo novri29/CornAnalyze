@@ -1,13 +1,21 @@
 package com.cornanalyze.cornanalyze
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.cornanalyze.cornanalyze.databinding.ActivityResultsBinding
 import com.cornanalyze.cornanalyze.save.AppDatabase
@@ -27,6 +35,24 @@ class ResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
+        supportActionBar?.apply {
+            title = "CornAnalyze"
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@ResultsActivity, R.color.transparent)))
+
+            val textView = TextView(this@ResultsActivity).apply {
+                text = getString(R.string.result)
+                setTextColor(Color.BLACK)
+                textSize = 20f
+                typeface = ResourcesCompat.getFont(this@ResultsActivity, R.font.poppins_medium)
+            }
+            setDisplayShowTitleEnabled(false)
+            setCustomView(textView)
+            setDisplayShowCustomEnabled(true)
+        }
 
         try {
             // Ambil data dari Intent
@@ -129,6 +155,19 @@ class ResultsActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("navigateTo", "HistoryFragment")
+                startActivity(intent)
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

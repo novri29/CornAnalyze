@@ -21,7 +21,7 @@ object UtilsUCrop {
             setCompressionQuality(90)
             setFreeStyleCropEnabled(true) // Enable free-style cropping
             setToolbarTitle("Crop Gambar")
-            setToolbarColor(ContextCompat.getColor(context, R.color.color1))
+            setToolbarColor(ContextCompat.getColor(context, R.color.white))
             setStatusBarColor(ContextCompat.getColor(context, R.color.white))
             setActiveControlsWidgetColor(ContextCompat.getColor(context, R.color.color1))
         }

@@ -2,7 +2,6 @@ package com.cornanalyze.cornanalyze
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,14 +10,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.cornanalyze.cornanalyze.databinding.ActivityInformationBinding
 import com.cornanalyze.cornanalyze.databinding.ActivitySettingBinding
 
-class SettingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
+class InformationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityInformationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        binding = ActivityInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
         supportActionBar?.apply {
@@ -26,13 +28,13 @@ class SettingActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@SettingActivity, R.color.transparent)))
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@InformationActivity, R.color.transparent)))
 
-            val textView = TextView(this@SettingActivity).apply {
+            val textView = TextView(this@InformationActivity).apply {
                 text = getString(R.string.app_name)
                 setTextColor(Color.BLACK)
                 textSize = 20f
-                typeface = ResourcesCompat.getFont(this@SettingActivity, R.font.poppins_medium)
+                typeface = ResourcesCompat.getFont(this@InformationActivity, R.font.poppins_medium)
             }
             setDisplayShowTitleEnabled(false)
             setCustomView(textView)
@@ -41,10 +43,12 @@ class SettingActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("navigateTo", "HistoryFragment")
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("navigateTo", "HistoryFragment")
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
                 startActivity(intent)
                 finish()
                 true

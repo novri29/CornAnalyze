@@ -45,4 +45,15 @@
     <string name="sumber_gray_leaf_spot">Sumber : \n1. Jurnal : A. Sapitri, J. Raharjo, and S. Rizal, “Identifikasi Penyakit Jagung Dengan Menerapkan Metode Gray Level Co-Occurrence Matrix (GLCM) Dan Support Vector Machine (SVM) Melalui Citra Daun Identification Of Corn Diseases By Applying Gray Level Co-Occurrence Matrix (GLCM) And Support Vector Machine ,” e-Proceeding Eng., vol. 8, no. 6, pp. 2963–2971, 2022. \n2. Jurnal : Identifikasi Jenis Penyakit Daun Jagung Menggunakan Deep Learning PreTrained Model oleh Muhammad Imron Rosadi dan Moch.Lutfi. \n3. https://plantix.net/id/library/plant-diseases/100166/northern-leaf-spot-of-maize/. \n4. Facebook : Direktorat Jenderal Tanaman Pangan - Kementan RI. \n5. Skripsi : Potensi Antagonis Jamur Dari Endofit Daun Jagung Terhadap Helminthosporium turcicum oleh Faizah, Akhamat Riza. \n6. Website Kompas : Penyakit Hawar Daun Jagung : Gejala, Siklus, dan Cara Menagtasi</string>
     <string name="common_rust_leaf">Common Rust Leaf</string>
     <string name="GrayLeafSpot_Leaf">Gray Leaf Spot Leaf</string>
+    <string name="result">Hasil Analisa</string>
+    <string name="saran">Saran : </string>
+    <string name="simpan">SIMPAN HASIL</string>
+    <string name="jenis_daun_tanaman_jagung">Jenis Daun Tanaman Jagung</string>
+    <string name="mulai_scan_sekarang">Mulai Scan \nSekarang</string>
+    <string name="pelajari_lebih_lanjut">Pelajari Lebih Lanjut</string>
+    <string name="healthy_daun_sehat">Healthy\n(Daun Sehat)</string>
+    <string name="gray_leaf_spot_bercak_daun">Gray Leaf Spot\n(Bercak Daun)</string>
+    <string name="blight_hawar_daun">Blight\n(Hawar Daun)</string>
+    <string name="common_rust_karat_daun">Common Rust\n(Karat Daun)</string>
+    <string name="hasil">HASIL :</string>
 </resources>

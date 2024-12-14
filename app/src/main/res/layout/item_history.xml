@@ -7,8 +7,7 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="12dp"
     android:layout_gravity="center"
-    android:id="@+id/history_item"
-    app:cardElevation="0.5dp">
+    android:id="@+id/history_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card_history"
@@ -18,21 +17,21 @@
 
         <ImageView
             android:id="@+id/iv_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="340dp"
+            android:layout_height="240dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/tv_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="HASIL : "
+            android:text="@string/hasil"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="14sp"
@@ -48,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
-            android:contentDescription="Home"
+            android:contentDescription="Delete"
             android:src="@drawable/ic_delete_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_createdAt"
             app:layout_constraintEnd_toEndOf="@+id/iv_history"
-            app:layout_constraintTop_toBottomOf="@+id/iv_history" />
+            app:layout_constraintTop_toTopOf="@+id/tv_result" />
 
         <TextView
             android:id="@+id/tv_createdAt"

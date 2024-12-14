@@ -4,52 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.HistoryFragment">
+    tools:context=".fragments.HistoryFragment"
+    android:fitsSystemWindows="true"
+    android:paddingTop="48dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@drawable/rectangle"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_cornanalyze"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
             android:fontFamily="@font/montserratmedium"
-            android:textSize="22sp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_setting"
+        <TextView
+            android:id="@+id/tv_history_tersimpan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="History Tersimpan"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cornanalyze" />
+
+        <ImageButton
+            android:id="@+id/btn_information"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
-            android:contentDescription="Setting"
-            android:src="@drawable/ic_settings_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            android:contentDescription="Information"
+            android:src="@drawable/ic_info_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_history_tersimpan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_cornanalyze" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history"
@@ -57,7 +57,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_history_tersimpan"
             tools:listitem="@layout/item_history"/>
 
 

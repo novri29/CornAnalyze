@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <!-- Gambar hasil pemindaian -->
     <ImageView
@@ -12,97 +14,167 @@
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:contentDescription="Gambar yang dipindai"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/prediksi"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/prediksi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/prediksi"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gambarImageView" />
-
-    <!-- Teks untuk hasil prediksi -->
-    <TextView
-        android:id="@+id/hasilTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Hasil prediksi akan muncul di sini"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prediksi" />
-
-    <!-- Teks untuk deskripsi -->
-    <TextView
-        android:id="@+id/deskripsi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/deksripsi"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hasilTextView" />
-
-    <TextView
-        android:id="@+id/deskripsiTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Deskripsi akan muncul di sini"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deskripsi" />
-
-    <!-- Teks untuk saran -->
-    <TextView
-        android:id="@+id/saranTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Saran akan muncul di sini"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deskripsiTextView" />
+        tools:src="@tools:sample/avatars" />
 
     <!-- Teks untuk waktu pemindaian -->
     <TextView
         android:id="@+id/waktuPemindaianTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Waktu Pemindaian"
-        android:textSize="16sp"
         android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Waktu Pemindaian"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/gambarImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gambarImageView" />
+
+    <ScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saranTextView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waktuPemindaianTextView"
+        app:layout_constraintBottom_toTopOf="@id/save">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Layout untuk prediksi -->
+            <LinearLayout
+                android:id="@+id/ll_prediksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_shape"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/prediksi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/prediksi"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/hasilTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Hasil prediksi akan muncul di sini"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Layout untuk deskripsi -->
+            <LinearLayout
+                android:id="@+id/sv_deskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_shape"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/deskripsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deksripsi"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginTop="8dp" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/deskripsiTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi akan muncul di sini"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Layout untuk saran -->
+            <LinearLayout
+                android:id="@+id/sv_saran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_shape"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/saran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/saran"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/saranTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Saran akan muncul di sini"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Tombol Simpan -->
     <Button
         android:id="@+id/save"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SIMPAN"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/color_pallet1"
+        android:text="@string/simpan"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/color1"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waktuPemindaianTextView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

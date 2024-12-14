@@ -1,5 +1,6 @@
 package com.cornanalyze.cornanalyze.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +62,19 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
 
             resultTextView.text = prediction.result // Tetapkan hasil prediksi.
             deleteButton.setOnClickListener {
-                onDeleteClickListener?.onDeleteClick(adapterPosition) // Trigger event delete.
+                AlertDialog.Builder(itemView.context).apply {
+                    setTitle("Konfirmasi Hapus")
+                    setMessage("Apakah Anda yakin ingin menghapus item ini?")
+                    setPositiveButton("Ya") { dialog, _ ->
+                        onDeleteClickListener?.onDeleteClick(adapterPosition) // Trigger event delete jika pengguna memilih "Ya".
+                        dialog.dismiss()
+                    }
+                    setNegativeButton("Tidak") { dialog, _ ->
+                        dialog.dismiss() // Tutup dialog jika pengguna memilih "Tidak".
+                    }
+                    create()
+                    show()
+                }
             }
 
             itemView.setOnClickListener {

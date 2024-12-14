@@ -59,8 +59,10 @@ class BlightLeaf : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             android.R.id.home -> {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("navigateTo", "HomeFragment")
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    intent.putExtra("navigateTo", "HomeFragment")
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
                 startActivity(intent)
                 finish()
                 true

@@ -1,50 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/iv_detail_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:contentDescription="Gambar yang dipindai"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/resultTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Result"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/deskripsiTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Description"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/saranTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Saran akan muncul di sini"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp" />
-
+    <!-- Teks untuk waktu pemindaian -->
     <TextView
         android:id="@+id/waktuPemindaianTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Waktu Pemindaian"
-        android:textSize="16sp"
         android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Waktu Pemindaian"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@android:color/black"
-        android:layout_marginTop="8dp" />
-</LinearLayout>
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/iv_detail_image"
+        app:layout_constraintTop_toBottomOf="@+id/iv_detail_image" />
+
+    <ScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waktuPemindaianTextView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Layout untuk prediksi -->
+            <LinearLayout
+                android:id="@+id/ll_prediksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_shape"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/prediksi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/prediksi"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/resultTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Hasil prediksi akan muncul di sini"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Layout untuk deskripsi -->
+            <LinearLayout
+                android:id="@+id/sv_deskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_shape"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/deskripsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/deksripsi"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/deskripsiTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Deskripsi akan muncul di sini"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Layout untuk saran -->
+            <LinearLayout
+                android:id="@+id/sv_saran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_shape"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/saran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/saran"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/saranTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Saran akan muncul di sini"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

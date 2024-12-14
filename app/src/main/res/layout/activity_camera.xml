@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CameraActivity">
+    tools:context=".CameraActivity"
+    android:fitsSystemWindows="true">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
@@ -17,23 +18,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/background_button_camera"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
         android:id="@+id/captureImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_radio_button_checked_24" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_baseline_circle_24" />
 
     <ImageView
         android:id="@+id/switchCamera"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/viewFinder"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_switch_camera_24" />
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_baseline_flip_camera_android_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
