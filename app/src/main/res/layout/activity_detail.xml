@@ -124,6 +124,42 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Layout untuk penyebab -->
+            <LinearLayout
+                android:id="@+id/sv_penyebab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_shape"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/penyebab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/penyebab"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/penyebabTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Penyebab"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <!-- Layout untuk saran -->
             <LinearLayout
                 android:id="@+id/sv_saran"
@@ -143,7 +179,7 @@
                     android:textSize="14sp" />
 
                 <View
-                    android:id="@+id/line3"
+                    android:id="@+id/line4"
                     android:layout_width="120dp"
                     android:layout_height="1dp"
                     android:background="@color/black" />
@@ -156,6 +192,42 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Saran akan muncul di sini"
                     android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Layout untuk sumber -->
+            <LinearLayout
+                android:id="@+id/sv_sumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_shape"
+                android:padding="10dp"
+                android:backgroundTint="@color/white">
+
+                <TextView
+                    android:id="@+id/sumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/sumber"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="#757575" />
+
+                <TextView
+                    android:id="@+id/sumberTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Saran"
+                    android:textColor="#757575"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>

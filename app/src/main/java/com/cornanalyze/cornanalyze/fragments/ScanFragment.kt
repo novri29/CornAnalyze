@@ -150,7 +150,9 @@ class ScanFragment : Fragment() {
         val label = prediction.label
         val probability = prediction.probability
         val description = prediction.description
+        val cause = prediction.cause
         val handling = prediction.handling
+        val source = prediction.source
 
         // Pastikan imageUri sudah ada
         val imageUri = Uri.parse(binding.previewImageView.tag as? String ?: "")
@@ -160,7 +162,10 @@ class ScanFragment : Fragment() {
             putExtra("EXTRA_GAMBAR_URI", imageUri.toString())
             putExtra("EXTRA_HASIL_PREDIKSI", "$label ($probability%)")
             putExtra("EXTRA_DESKRIPSI", description)
+            putExtra("EXTRA_PENYEBAB", cause)
             putExtra("EXTRA_SARAN", handling)
+            putExtra("EXTRA_SUMBER", source)
+
         }
         startActivity(intent)
     }

@@ -21,7 +21,9 @@ class ImageClassifierHelper(context: Context) {
         val label: String,
         val probability: Int,
         val description: String,
-        val handling: String
+        val cause: String,
+        val handling: String,
+        val source: String
     )
 
     @Throws(IOException::class)
@@ -72,33 +74,57 @@ class ImageClassifierHelper(context: Context) {
             val probability = (predictions[maxIndex] * 100).toInt()
 
             val description = if (label == "Blight") {
-                "Penyakit ini disebabkan oleh bakteri atau jamur yang menyebabkan bercak cokelat berbentuk lonjong pada daun, terutama pada kondisi lembap."
+                "Penyakit hawar (blight) jagung merupakan penyakit yang banyak menyebar di Amerika, Asia, Afrika, dan juga Eropa, kerugian apabila tanaman jagung terkena penyakit hawar dapat mencapai 50%. Penyakit hawar jagung terindikasi berbentuk bercak kecil yang berbentuk oval, yang kemudian bercak tersebut menjadi memanjang seperti ellips serta tumbuh menjadi nekrotik."
             } else if (label == "Common Rust") {
-                "Penyakit ini disebabkan oleh jamur Puccinia sorghi yang menyebabkan pustula cokelat kemerahan pada daun."
+                "Penyakit karat daun (common rust) yang diakibatkan oleh Pucciania sorgi terindikasi dini berbentuk bintik-bintik merah dengan mengeluarkan serbuk semacam tepung bercorak coklat kekuningan. Dengan adanya penyakit ini, tumbuhan jagung tidak bsia melakukan fotosintesis dengan sempurna yang berakibat pertumbuhan menjadi lamat dan dapat meyebabkan tumbuhan mati."
             } else if (label == "Gray Leaf Spot") {
-                "Penyakit ini disebabkan oleh jamur Cercospora zeae-maydis yang menyebabkan bercak persegi panjang berwarna abu-abu hingga cokelat pada daun."
+                "Penyakit bercak daun (gray leaf spot) merupakan penyakit yang memiliki gejala awal berupa daun abu-abu yang terlihat seperti lesi bulat kecil dengan memiliki lingkaran kuning yang berada disekitar daun. Lesi tersebut dapat berubah menjadi coklat sebelum sporulasi jamur dimulai. Penyakit ini pada tahap awalnya sangat sulit untuk diidentifikasi karena bercak menyerupai penyakit karat daun pada umumnya."
             } else if (label == "Healthy") {
                 "Tanaman dalam kondisi sehat tanpa tanda-tanda penyakit atau kerusakan. Tanaman dapat berproduksi optimal."
             } else {
                 "Tidak ada deskripsi tersedia."
             }
 
-            val handling = if (label == "Blight") {
-                "1. Gunakan fungisida berbasis tembaga.\n2. Pastikan drainase lahan baik untuk mengurangi kelembapan.\n3. Hindari irigasi di malam hari."
+            val cause = if (label == "Blight") {
+                "Hawar (blight) pada jagung dapat disebabkan oleh berbagai jamur dan bakter, yaitu \n1. Colletotrichum graminicola : Jamur penyebab hawar daun antraknosa pada jagung ini bertahan di sisa tanaman selama musim dingin dan menghasilkan spora untuk menginfeksi tanaman di musim berikutnya. \n2. Exserohilum turcicum : Jamur penyebab hawar daun jagung utara ini tumbuh subur di cuaca basah, lembab, dan dingin, terutama di akhir musim tanam. \n3. Faktor lainnya yaitu kondisi lembap dan ringan, suhu antara 18-27 derajat celcius, dan udara yang berembun. \n4. Sisa tanaman yang terkontaminasi : jamur dapat bertahan lama pada sisa-sisa tanaman yang tidak dibersihkan pada lahan. \n5. Kerapatan tanaman : penanaman terlalu rapat dapat menghambat sirkulasi udara, yang mengakibatkan meningkatkan kelembapan, dan mempercepat penyebaran spora jamur pada tanaman. \n6. Tanaman rentan : varietas jagung yang tidak tahan terhadap hawar dapat lebih mudah terinfeksi, hal tersebut dapat diperparah dengan tidak mendapatkannya nutrisi yang cukup pada tanaman yang akan mengalami stres lingkungn."
             } else if (label == "Common Rust") {
-                "1. Terapkan fungisida berbasis mankozeb atau klorotalonil.\n2. Pilih varietas jagung yang tahan karat.\n3. Hindari penanaman terlalu padat."
+                "1. Spora : Spora jamur dapat dipindahkan oleh angin dan hujan ke tanaman lain yang sehat. \n2. Kelembaban : Kelembaban yang tinggi mendukung perkemabngan penyakit ini. \\n3. Suhu : Suhu dingin antara 15-20 derajat celcius mendukung perkembangan penyakit ini. \\n4. Genetik : Setiap varietas jagung memiliki sifat ketahanan yang berbeda terhadap penyakit ini. "
             } else if (label == "Gray Leaf Spot") {
-                "1. Gunakan fungisida strobilurin atau triazole.\n2. Lakukan rotasi tanaman untuk mengurangi inokulum.\n3. Hindari sisa tanaman tertinggal di lahan."
+                "1. Jamur: Penyakit ini disebabkan oleh jamur Cercospora zeae-maydis yang dapat bertahan dalam sisa-sisa tanaman di tanah. \\n2. Suhu: Suhu hangat yang mendukung perkembangan penyakit adalah sekitar 27°C (80°F). \\n3. Kelembaban: Kelembaban tinggi yang mendukung perkembangan penyakit adalah sekitar 90% atau lebih tinggi selama 12 jam atau lebih \\n4. Pengolahan tanah: Sistem penanaman dengan pengolahan tanah yang dikurangi atau tanpa olah tanah dapat meningkatkan risiko wabah penyakit ini. \\n5. Penanaman jagung terus-menerus: Penanaman jagung secara terus-menerus juga dapat meningkatkan risiko wabah penyakit ini. \\n6. Hibrida yang rentan: Hibrida yang rentan lebih mudah terserang penyakit ini. \\n7. Tanggal penanaman: Penanaman yang terlambat dapat meningkatkan risiko wabah penyakit ini. \\n8. Riwayat penyakit parah: Riwayat lapangan penyakit parah dapat meningkatkan risiko wabah penyakit ini. \\n9. Irigasi: Irigasi dapat meningkatkan risiko wabah penyakit ini."
             } else if (label == "Healthy") {
-                "Tanaman sehat. Lanjutkan perawatan rutin dan pastikan kondisi optimal untuk pertumbuhan."
+                "-"
+            } else {
+                "Tidak ada penyebab ditemukan."
+            }
+
+            val handling = if (label == "Blight") {
+                "1. Menanam varietas yang memiliki ketahanan pada penyakit hawar (Blight) seperti Bisma, Pioneer, Semar, dan lain-lain. \n2. Menanam jagung pada awal hingga akhir musim kemarau secara bersama-sama atau serempak. \n3. Gunakan funisida sistemik. \n4. Rotasi tanaman dengan tanaman yang bukan sereal (misalnya dengan tanaman kacang-kacangan) untuk memutus rantai makanan dari jamur. \n5. Lakukan sanitasi dan eradikasi (upaya pembasmian) lingkungan seperti rumput-rumputan karena dapat menjadi inang penyakit untuk masa tanam berikutnya."
+            } else if (label == "Common Rust") {
+                "1. Menanam varietas tahan karat daun jagung yang sehat. \\n2. Mengatur jarak tanam untuk menjaga suhu dan kelembaban tanaman. \\n3. Menanam di awal musim kemarau. \\n4. Menggunakan pestisida kimiawi seperti zineb, oksilorida tembaga, Fermat, dan dithane."
+            } else if (label == "Gray Leaf Spot") {
+                "1. Menanam varietas yang tahan terhadap penyakit. \\n2. Memusnahkan seluruh bagian tanaman yang terinfeksi, termasuk akarnya. \\n3. Menyemprotkan fungisida pada tahap awal. \\n4. Melakukan rotasi tanaman jangka panjang dengan tanaman bukan inang. \\n5. Memperluas ruang di antara tanaman untuk menjaga peredaran udara yang baik. \\n6. Menanam di awal musim kemarau.."
+            } else if (label == "Healthy") {
+                "T"
             } else {
                 "Tidak ada langkah penanganan spesifik."
             }
 
-            return PredictionResult(label, probability, description, handling)
+            val source = if (label == "Blight") {
+                "1. Jurnal : D. Iswantoro and D. Handayani UN, “Klasifikasi Penyakit Tanaman Jagung Menggunakan Metode Convolutional Neural Network (CNN),” J. Ilm. Univ. Batanghari Jambi, vol. 22, no. 2, p. 900, 2022, doi: 10.33087/jiubj.v22i2.2065. \n2. Website Edu : https://cals.cornell.edu/field-crops/corn/diseases-corn/anthracnose-leaf-blight \n3. Website : https://www.kompas.com/homey/read/2022/08/04/085600276/penyakit-hawar-daun-jagung--gejala-siklus-dan-cara-mengatasi \n4. Website : https://academy.bertani.co/perpustakaan/teknik-pengendalian-penyakit-hawar-daun-helminthosporium-turcicum-pada-tanaman-jagung"
+            } else if (label == "Common Rust") {
+                "1. Jurnal : D. Iswantoro and D. Handayani UN, “Klasifikasi Penyakit Tanaman Jagung Menggunakan Metode Convolutional Neural Network (CNN),” J. Ilm. Univ. Batanghari Jambi, vol. 22, no. 2, p. 900, 2022, doi: 10.33087/jiubj.v22i2.2065. \\n2. Website Pemerintah : https://bbpopt.tanamanpangan.pertanian.go.id/artikel/penyakit-karat-daun-tanaman-jagung. \\n3. Jurnal : Interaksi Faktor Iklim dan Varietas terhadap Laju Perkembangan Penyakit Karat Daun (Puccinia polysora Undrew) pada Jagung (Zea mays L.) oleh Reymas M.R. Ruimassa, Rosdiana Sari, Eko Agus Martanto. \\n4. Website : https://plantix.net/id/library/plant-diseases/100082/common-rust-of-maize/. "
+            } else if (label == "Gray Leaf Spot") {
+                "1. Jurnal : A. Sapitri, J. Raharjo, and S. Rizal, “Identifikasi Penyakit Jagung Dengan Menerapkan Metode Gray Level Co-Occurrence Matrix (GLCM) Dan Support Vector Machine (SVM) Melalui Citra Daun Identification Of Corn Diseases By Applying Gray Level Co-Occurrence Matrix (GLCM) And Support Vector Machine ,” e-Proceeding Eng., vol. 8, no. 6, pp. 2963–2971, 2022. \\n2. Jurnal : Identifikasi Jenis Penyakit Daun Jagung Menggunakan Deep Learning PreTrained Model oleh Muhammad Imron Rosadi dan Moch.Lutfi. \\n3. Website : https://cropprotectionnetwork.org/encyclopedia/gray-leaf-spot-of-corn. \\n4. Website : https://www.pioneer.com/us/agronomy/gray_leaf_spot_cropfocus.html \\n5. Website : https://plantix.net/id/library/plant-diseases/100107/grey-leaf-spot-of-maize/ \\n6. Website : https://extensionpubs.unl.edu/publication/g1902/na/html/view \\n7. Facebook : Direktorat Jenderal Tanaman Pangan - Kementan RI. \\n8. Skripsi : Potensi Antagonis Jamur Dari Endofit Daun Jagung Terhadap Helminthosporium turcicum oleh Faizah, Akhamat Riza. \\n9. Website Kompas : Penyakit Hawar Daun Jagung : Gejala, Siklus, dan Cara Menagtasi"
+            } else if (label == "Healthy") {
+                "T"
+            } else {
+                "Tidak ada sumber penanganan"
+            }
+
+            return PredictionResult(label, probability, description, cause, handling, source)
         }
 
-        return PredictionResult("Unknown", 0, "Tidak ada informasi tersedia.", "Tidak ada langkah penanganan.")
+        return PredictionResult("Unknown", 0, "Tidak ada informasi tersedia.", "Tidak ada penyebab ditemukan.","Tidak ada langkah penanganan.", "Tidak ada sumber informasi.")
     }
 
 

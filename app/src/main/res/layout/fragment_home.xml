@@ -292,7 +292,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/iv_blight" />
+                            android:src="@drawable/iv_blight2" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

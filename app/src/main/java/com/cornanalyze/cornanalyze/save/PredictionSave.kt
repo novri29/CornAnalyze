@@ -10,6 +10,8 @@ data class PredictionSave(
     val imagePath: String,
     val result: String,
     val description: String,
+    val cause: String,
     val advice: String,
+    val souce: String,
     val date: String
 )

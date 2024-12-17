@@ -57,8 +57,10 @@ class ResultsActivity : AppCompatActivity() {
         try {
             // Ambil data dari Intent
             val hasilPrediksi = intent.getStringExtra("EXTRA_HASIL_PREDIKSI") ?: "Hasil tidak ditemukan"
-            val saranPenanganan = intent.getStringExtra("EXTRA_SARAN") ?: "Saran tidak ditemukan"
-            val deskripsiPenyakit = intent.getStringExtra("EXTRA_DESKRIPSI") ?: "Deskripsi tidak tersedia"
+            val deskripsiPenyakit = intent.getStringExtra("EXTRA_DESKRIPSI") ?: "Tidak ada informasi tersedia."
+            val deskripsiPenyebab = intent.getStringExtra("EXTRA_PENYEBAB") ?: "Tidak ada penyebab ditemukan"
+            val saranPenanganan = intent.getStringExtra("EXTRA_SARAN") ?: "Tidak ada langkah penanganan."
+            val sumber = intent.getStringExtra("EXTRA_SUMBER") ?: "Tidak ada sumber informasi."
             val waktuPemindaian = getCurrentTime()
 
             // URI gambar
@@ -68,7 +70,9 @@ class ResultsActivity : AppCompatActivity() {
             // Menampilkan hasil di UI
             binding.hasilTextView.text = hasilPrediksi
             binding.deskripsiTextView.text = deskripsiPenyakit
+            binding.penyebabTextView.text = deskripsiPenyebab
             binding.saranTextView.text = saranPenanganan
+            binding.sumberTextView.text = sumber
             binding.waktuPemindaianTextView.text = waktuPemindaian
 
             // Load gambar yang sudah dipotong
@@ -93,7 +97,9 @@ class ResultsActivity : AppCompatActivity() {
                         croppedImageUri,
                         hasilPrediksi,
                         deskripsiPenyakit,
+                        deskripsiPenyebab,
                         saranPenanganan,
+                        sumber,
                         waktuPemindaian
                     )
                 } else {
@@ -111,7 +117,7 @@ class ResultsActivity : AppCompatActivity() {
         return dateFormat.format(Date())
     }
 
-    private fun savePredictionToDatabase(imageUri: Uri, result: String, description: String, advice: String, date: String) {
+    private fun savePredictionToDatabase(imageUri: Uri, result: String, description: String, cause : String, advice: String, source: String, date: String) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // Membuat entitas PredictionSave
@@ -119,7 +125,9 @@ class ResultsActivity : AppCompatActivity() {
                     imagePath = imageUri.toString(),
                     result = result,
                     description = description,
+                    cause = cause,
                     advice = advice,
+                    souce = source,
                     date = date
                 )
                 val database = AppDatabase.getDatabase(applicationContext)

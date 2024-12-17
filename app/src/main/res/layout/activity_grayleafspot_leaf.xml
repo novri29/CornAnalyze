@@ -126,12 +126,12 @@
                 android:paddingBottom="8dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:text="@string/gejala_penyakit_hawar_daun_jagung"
+                android:text="@string/gejala_penyakit_bercak_daun_jagung"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="16sp"
                 android:textStyle="bold"  />
 
-            <!-- Cara Mengatasi -->
+
             <TextView
                 android:id="@+id/tv_blight_bercakdaun_isi"
                 android:layout_width="match_parent"
@@ -142,6 +142,7 @@
                 android:text="@string/gejala_gray_leaf_spot"
                 android:textSize="14sp" />
 
+            <!-- Cara Mengatasi -->
             <TextView
                 android:id="@+id/tv_mengatasi_bercakdaun"
                 android:layout_width="match_parent"
@@ -169,12 +170,12 @@
                 android:id="@+id/tv_sumber_bercakdaun_isi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
-                android:textColor="#757575"
                 android:text="@string/sumber_gray_leaf_spot"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_regular" />
+                android:textColor="#757575"
+                android:textSize="12sp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

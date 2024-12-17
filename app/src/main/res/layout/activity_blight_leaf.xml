@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/blight_leaf"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
@@ -26,10 +27,11 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_delete_24"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_logo"
+            android:background="@drawable/rounded_corner"
             app:layout_constraintStart_toStartOf="@+id/tv_healthy"
             app:layout_constraintTop_toBottomOf="@+id/tv_healthy" />
 
@@ -41,11 +43,11 @@
             android:layout_marginBottom="5dp"
             android:text="@string/app_name"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -55,7 +57,7 @@
             android:background="@drawable/rounded_corner"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/iv_blight"
+            android:src="@drawable/iv_blight2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -79,7 +81,8 @@
                 android:paddingBottom="12dp"
                 android:text="Keterangan Daun Blight (Hawar)"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,8 +91,9 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="16dp"
-                android:text="Lorem Lorem Lorem Lorem Lorem Lorem Penyakit hawar (blight) jagung merupakan penyakit yang banyak menyebar di Amerika, Asia, Afrika, dan juga Eropa, kerugian apabila tanaman jagung terkena penyakit hawar dapat mencapai 50%. Penyakit hawar jagung terindikasi berbentuk bercak kecil yang berbentuk oval, yang kemudian bercak tersebut menjadi memanjang seperti ellips serta tumbuh menjadi nekrotik."
-                android:textSize="16sp" />
+                android:text="Penyakit hawar (blight) jagung merupakan penyakit yang banyak menyebar di Amerika, Asia, Afrika, dan juga Eropa, kerugian apabila tanaman jagung terkena penyakit hawar dapat mencapai 50%. Penyakit hawar jagung terindikasi berbentuk bercak kecil yang berbentuk oval, yang kemudian bercak tersebut menjadi memanjang seperti ellips serta tumbuh menjadi nekrotik."
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"/>
 
             <!-- Faktor -->
             <TextView
@@ -98,8 +102,10 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/black"
                 android:text="Faktor Penyebab Hawar Pada Jagung :"
-                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -108,11 +114,15 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
-                android:text="1. Spora : Spora jamur dapat dipindahkan oleh angin dan hujan ke tanaman lain yang sehat.
-                \n2. Kelembabann : Kelembaban yang tinggi mendukung perkemabngan penyakit ini.
-                \n3. Suhu : Suhu dingin antara 15-20 derajat celcius mendukung perkembangan penyakit ini.
-                \n4. Genetik : Setiap varietas jagung memiliki sifat ketahanan yang berbeda terhadap penyakit ini."
-                android:textSize="16sp" />
+                android:text="Hawar (blight) pada jagung dapat disebabkan oleh berbagai jamur dan bakter, yaitu
+                \n1. Colletotrichum graminicola : Jamur penyebab hawar daun antraknosa pada jagung ini bertahan di sisa tanaman selama musim dingin dan menghasilkan spora untuk menginfeksi tanaman di musim berikutnya.
+                \n2. Exserohilum turcicum : Jamur penyebab hawar daun jagung utara ini tumbuh subur di cuaca basah, lembab, dan dingin, terutama di akhir musim tanam.
+                \n3. Faktor lainnya yaitu kondisi lembap dan ringan, suhu antara 18-27 derajat celcius, dan udara yang berembun.
+                \n4. Sisa tanaman yang terkontaminasi : jamur dapat bertahan lama pada sisa-sisa tanaman yang tidak dibersihkan pada lahan.
+                \n5. Kerapatan tanaman : penanaman terlalu rapat dapat menghambat sirkulasi udara, yang mengakibatkan meningkatkan kelembapan, dan mempercepat penyebaran spora jamur pada tanaman.
+                \n6. Tanaman rentan : varietas jagung yang tidak tahan terhadap hawar dapat lebih mudah terinfeksi, hal tersebut dapat diperparah dengan tidak mendapatkannya nutrisi yang cukup pada tanaman yang akan mengalami stres lingkungn."
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular" />
 
             <!-- Gejala -->
             <TextView
@@ -121,21 +131,21 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/black"
                 android:text="Gejala Penyakit Hawar Daun Jagung :"
-                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_blight_blight_isi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
-                android:text="1. Lesi kecil pada daun yang kemudian melingkar dan memanjang.
-                \n2. Cendawan keluar dari permukaan daun.
-                \n3. Lesi menjadi lebih memanjang dan biasanya terjadi halo kuning.
-                \n4. Bisul (pustul) pada kedua permuakaan daun bagian atas dan bawah dengan warna coklat kemerahan."
-                android:textSize="16sp" />
+                android:text="Gejala awal penyakit hawar (blight) pada tanaman jagung yaitu adalah dengan munculnya sebuah bercak kecil kebasah-basahan, selanjutnya bercak tersebut akan semakin banyak berwarna hijau kekuningan. Pada tingakatan yang sudah lebih parah bercak akan semakin membesar dan berkembang menjadi nekrotik."
+                android:textSize="14sp" />
 
             <!-- Cara Mengatasi -->
             <TextView
@@ -144,8 +154,10 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="8dp"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/black"
                 android:text="Cara mengendalikan penyakit karat daun :"
-                android:textSize="18sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -154,25 +166,29 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
-                android:text="1. Menanam varietas tahan karat daun jagung yang sehat.
-                \n2. Mengatur jarak tanam untuk menjaga suhu dan kelembaban tanaman.
-                \n3. Menanam di awal musim kemarau.
-                \n4. Menggunakan pestisida kimiawi seperti zineb, oksilorida tembaga, Fermat, dan dithane."
-                android:textSize="16sp" />
+                android:text="1. Menanam varietas yang memiliki ketahanan pada penyakit hawar (Blight) seperti Bisma, Pioneer, Semar, dan lain-lain.
+                \n2. Menanam jagung pada awal hingga akhir musim kemarau secara bersama-sama atau serempak.
+                \n3. Gunakan funisida sistemik.
+                \n4. Rotasi tanaman dengan tanaman yang bukan sereal (misalnya dengan tanaman kacang-kacangan) untuk memutus rantai makanan dari jamur.
+                \n5. Lakukan sanitasi dan eradikasi (upaya pembasmian) lingkungan seperti rumput-rumputan karena dapat menjadi inang penyakit untuk masa tanam berikutnya."
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"/>
 
             <!-- Sumber -->
             <TextView
                 android:id="@+id/tv_sumber_blight_isi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
                 android:textColor="#757575"
                 android:text="Sumber :
                 \n1. Jurnal : D. Iswantoro and D. Handayani UN, “Klasifikasi Penyakit Tanaman Jagung Menggunakan Metode Convolutional Neural Network (CNN),” J. Ilm. Univ. Batanghari Jambi, vol. 22, no. 2, p. 900, 2022, doi: 10.33087/jiubj.v22i2.2065.
-                \n2. https://bbpopt.tanamanpangan.pertanian.go.id/artikel/penyakit-karat-daun-tanaman-jagung.
-                \n3. Jurnal : Interaksi Faktor Iklim dan Varietas terhadap Laju Perkembangan Penyakit Karat Daun (Puccinia polysora Undrew) pada Jagung (Zea mays L.) oleh Reymas M.R. Ruimassa, Rosdiana Sari, Eko Agus Martanto.
-                \n4. https://plantix.net/id/library/plant-diseases/100082/common-rust-of-maize/."
+                \n2. Website Edu : https://cals.cornell.edu/field-crops/corn/diseases-corn/anthracnose-leaf-blight
+                \n3. Jurnal : Nurlaela Tuzahrohmi, Ugik Romadi, dan Irianti Kurniasari “Efektivitas Paenibacillus polymyxa dan Pseudomonas fluorescens dalam Pengendalian Penyakit Haur daun(Helminthosporium turcicum) pada Tanaman Jagung (Zea mays L.)”
+                \n4. Website : https://www.kompas.com/homey/read/2022/08/04/085600276/penyakit-hawar-daun-jagung--gejala-siklus-dan-cara-mengatasi
+                \n5. Website : https://academy.bertani.co/perpustakaan/teknik-pengendalian-penyakit-hawar-daun-helminthosporium-turcicum-pada-tanaman-jagung"
                 android:textSize="12sp" />
 
         </LinearLayout>

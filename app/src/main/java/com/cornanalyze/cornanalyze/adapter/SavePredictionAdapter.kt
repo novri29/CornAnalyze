@@ -53,6 +53,7 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.iv_history)
         private val resultTextView: TextView = itemView.findViewById(R.id.tv_result)
+        private val createdAtTextView: TextView = itemView.findViewById(R.id.tv_createdAt)
         private val deleteButton: ImageView = itemView.findViewById(R.id.iv_trash)
 
         fun bind(prediction: PredictionSave) {
@@ -61,6 +62,7 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
                 .into(imageView) // Pastikan ini ditambahkan untuk memuat gambar.
 
             resultTextView.text = prediction.result // Tetapkan hasil prediksi.
+            createdAtTextView.text = prediction.date // Tetapkan tanggal dan waktu.
             deleteButton.setOnClickListener {
                 AlertDialog.Builder(itemView.context).apply {
                     setTitle("Konfirmasi Hapus")

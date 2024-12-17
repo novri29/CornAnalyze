@@ -10,10 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.cornanalyze.cornanalyze.databinding.ActivityInformationBinding
-import com.cornanalyze.cornanalyze.databinding.ActivitySettingBinding
 
 class InformationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInformationBinding
