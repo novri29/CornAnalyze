@@ -14,7 +14,7 @@
         android:fitsSystemWindows="true">
 
         <TextView
-            android:id="@+id/tv_healthy"
+            android:id="@+id/tv_blight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/blight_leaf"
@@ -32,8 +32,8 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_logo"
             android:background="@drawable/rounded_corner"
-            app:layout_constraintStart_toStartOf="@+id/tv_healthy"
-            app:layout_constraintTop_toBottomOf="@+id/tv_healthy" />
+            app:layout_constraintStart_toStartOf="@+id/tv_blight"
+            app:layout_constraintTop_toBottomOf="@+id/tv_blight" />
 
         <TextView
             android:id="@+id/tv_name"

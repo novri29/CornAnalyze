@@ -169,8 +169,10 @@ class ResultsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             android.R.id.home -> {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("navigateTo", "HistoryFragment")
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    intent.putExtra("navigateTo", "HistoryFragment")
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
                 startActivity(intent)
                 finish()
                 true

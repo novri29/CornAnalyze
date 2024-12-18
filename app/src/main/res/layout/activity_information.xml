@@ -16,11 +16,35 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/ic_info_24" />
+        android:src="@drawable/iv_logo" />
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_shape"
+        android:backgroundTint="@color/color_pallet1">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:justificationMode="inter_word"
+          android:padding="10dp"
+          android:text="CornAnalyze merupakan sebuah aplikasi yang dapat digunakan oleh segala kalangan yang dikhususkan untuk para petani yang sedang menanam jagung. Aplikasi ini berguna untuk mengecek kesehatan daun jagung dengan cara mendeteksinya menggunakan kamera langsung atau mengambil gambar dari galeri HP. Setelah itu hasil deteksi akan muncul beserta saran penanganan dari suatu penyakit."
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:lineSpacingExtra="2dp"
+          android:lineSpacingMultiplier="1.2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="65dp"
@@ -32,9 +56,11 @@
           android:layout_height="wrap_content"
           android:justificationMode="inter_word"
           android:padding="10dp"
-          android:text="TEST"
+          android:text="Kontak Kami : \nEmail : novriyanferdiyanto6@gmail.com \nFacebook : Novriyan Ferdiyanto \nInstagram : novriyanf"
           android:textColor="@color/white"
           android:textSize="16sp"
+          android:lineSpacingExtra="2dp"
+          android:lineSpacingMultiplier="1.2"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />

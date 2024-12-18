@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.cornanalyze.cornanalyze.MainActivity
 import com.cornanalyze.cornanalyze.TutorialActivity
@@ -63,8 +62,9 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), CommonrustLeaf::class.java)
             startActivity(intent)
         }
-        val layoutquestion: ImageButton = binding.btnQustion
-        layoutquestion.setOnClickListener {
+
+        val layouttutorial: ImageButton = binding.btnTutorial
+        layouttutorial.setOnClickListener {
             val intent = Intent(requireContext(), TutorialActivity::class.java)
             startActivity(intent)
         }

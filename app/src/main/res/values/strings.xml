@@ -58,4 +58,12 @@
     <string name="hasil">HASIL :</string>
     <string name="penyebab">Penyebab</string>
     <string name="sumber">Sumber</string>
+    <string name="tutorial1">1. Pada menu home klik menu \"Scan\" atau bisa klik pada tombol \"Mulai Scan Sekarang\"</string>
+    <string name="tutorial2">2. Selanjutnya pilih ingin menggunakan kamera aplikasi atau menggunakan gambar yang sudah ada di galeri. \n\nKeterangan : no 1 untuk camera aplikasi no 2 untuk galeri</string>
+    <string name="tutorial3">3. Kemudian ketika sudah memilih gambar, yaitu perlu melakukan crop pada gambar, jika sudah klik tanda ceklis dipojok kanan atas.</string>
+    <string name="tutorial4">4. Jika sudah mencrop, selanjutnya pilih tombol \"ANALISA\" untuk menganalisa gambar.</string>
+    <string name="tutorial5">5. Hasil analisa akan muncul, jika ingin menyimpannya maka hanya perlu menekan tombol \"SIMPAN HASIL\"</string>
+    <string name="tutorial6">6. Hasil yang sudah tersimpan akan tampil di History Tersimpan yang dapat dikunjungi pada meun History, pada menu tersebut dapat melakukan penghapusan pada item tersimpan dengan mengklik icon \"Tong sampah\", selain itu dapat melaihat detail dari scanning dengan mengklik pada salah satu item.</string>
+    <string name="tutorial7">7. Apabila mengklik salah satu item maka akan memunculkan detail sebagai berikut.</string>
+    <string name="tutorial">Tutorial Penggunaan</string>
 </resources>
