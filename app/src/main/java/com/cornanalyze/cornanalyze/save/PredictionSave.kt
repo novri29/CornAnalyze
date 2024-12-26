@@ -12,6 +12,6 @@ data class PredictionSave(
     val description: String,
     val cause: String,
     val advice: String,
-    val souce: String,
+    val source: String,
     val date: String
 )

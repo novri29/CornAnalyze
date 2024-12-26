@@ -127,7 +127,7 @@ class ResultsActivity : AppCompatActivity() {
                     description = description,
                     cause = cause,
                     advice = advice,
-                    souce = source,
+                    source = source,
                     date = date
                 )
                 val database = AppDatabase.getDatabase(applicationContext)

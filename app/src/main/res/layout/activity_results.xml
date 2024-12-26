@@ -83,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
                     android:text="Hasil prediksi"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -118,6 +119,7 @@
                     android:id="@+id/deskripsiTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
                     android:text="Deskripsi"
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
@@ -156,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
                     android:text="Penyebab"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -192,6 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
                     android:text="Saran"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
@@ -228,6 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_regular"
+                    android:justificationMode="inter_word"
                     android:text="Saran"
                     android:textColor="#757575"
                     android:textSize="14sp" />

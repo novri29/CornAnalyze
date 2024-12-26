@@ -91,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="16dp"
+                android:justificationMode="inter_word"
                 android:text="@string/deskripsi_common_rust"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"/>
@@ -114,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
+                android:justificationMode="inter_word"
                 android:text="@string/faktor_common_rust"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular" />
@@ -137,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
+                android:justificationMode="inter_word"
                 android:text="@string/gejala_common_rust"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular" />
@@ -160,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
+                android:justificationMode="inter_word"
                 android:text="@string/mengatasi_commonrust"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular" />
@@ -172,6 +176,7 @@
                 android:lineSpacingExtra="6dp"
                 android:paddingBottom="12dp"
                 android:textColor="#757575"
+                android:justificationMode="inter_word"
                 android:text="@string/sumber_commonrust"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"/>

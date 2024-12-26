@@ -55,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.deskripsiTextView).text = it.description
                     findViewById<TextView>(R.id.penyebabTextView).text = it.cause
                     findViewById<TextView>(R.id.saranTextView).text = it.advice
-                    findViewById<TextView>(R.id.sumberTextView).text = it.souce
+                    findViewById<TextView>(R.id.sumberTextView).text = it.source
                     findViewById<TextView>(R.id.waktuPemindaianTextView).text = it.date
 
                     Glide.with(this@DetailActivity)

@@ -16,7 +16,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/iv_logo" />
+        android:src="@drawable/iv_logo_png" />
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
           android:layout_height="wrap_content"
           android:justificationMode="inter_word"
           android:padding="10dp"
-          android:text="CornAnalyze merupakan sebuah aplikasi yang dapat digunakan oleh segala kalangan yang dikhususkan untuk para petani yang sedang menanam jagung. Aplikasi ini berguna untuk mengecek kesehatan daun jagung dengan cara mendeteksinya menggunakan kamera langsung atau mengambil gambar dari galeri HP. Setelah itu hasil deteksi akan muncul beserta saran penanganan dari suatu penyakit."
+          android:text="@string/keterangan_aplikasi"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:lineSpacingExtra="2dp"
@@ -56,7 +56,7 @@
           android:layout_height="wrap_content"
           android:justificationMode="inter_word"
           android:padding="10dp"
-          android:text="Kontak Kami : \nEmail : novriyanferdiyanto6@gmail.com \nFacebook : Novriyan Ferdiyanto \nInstagram : novriyanf"
+          android:text="@string/kontak_kami"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:lineSpacingExtra="2dp"

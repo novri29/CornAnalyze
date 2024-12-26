@@ -21,14 +21,14 @@ class InformationActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
         supportActionBar?.apply {
-            title = "CornAnalyze"
+            title = "Info Aplikasi"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
             setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@InformationActivity, R.color.transparent)))
 
             val textView = TextView(this@InformationActivity).apply {
-                text = getString(R.string.app_name)
+                text = "Info Aplikasi"
                 setTextColor(Color.BLACK)
                 textSize = 20f
                 typeface = ResourcesCompat.getFont(this@InformationActivity, R.font.poppins_medium)
