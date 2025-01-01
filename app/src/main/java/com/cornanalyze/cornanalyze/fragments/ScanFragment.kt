@@ -125,7 +125,11 @@ class ScanFragment : Fragment() {
         }
 
         binding.analyzeButton.setOnClickListener {
-            analyzeImage()
+            analyzeImage("8020") // For 80:20 model
+        }
+
+        binding.analyzeButton2.setOnClickListener {
+            analyzeImage("7030") // For 70:30 model
         }
 
         binding.previewImageView.post {
@@ -136,7 +140,7 @@ class ScanFragment : Fragment() {
         }
     }
 
-    private fun analyzeImage() {
+    private fun analyzeImage(modelType: String) {
         val drawable = binding.previewImageView.drawable
         if (drawable == null) {
             Toast.makeText(requireContext(), "Tidak ada gambar untuk dianalisis!", Toast.LENGTH_SHORT).show()
@@ -144,7 +148,13 @@ class ScanFragment : Fragment() {
         }
 
         val bitmap = (drawable as BitmapDrawable).bitmap
-        val prediction = tfliteModel.predictImage(bitmap)
+        // Use different model based on button clicked
+        val prediction = when (modelType) {
+            "8020" -> tfliteModel.predictImageWith8020(bitmap)
+            "7030" -> tfliteModel.predictImageWith7030(bitmap)
+            else -> throw IllegalArgumentException("Invalid model type")
+        }
+
 
         // Mendapatkan hasil prediksi
         val label = prediction.label

@@ -3,7 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="gallery">GALERI</string>
-    <string name="analyze">ANALISA</string>
+    <string name="analyze8020">ANALISA 80 20</string>
+    <string name="analyze7030">ANALISA 70 30</string>
     <string name="about_app">Tentang Aplikasi</string>
     <string name="contact">Kontak Kami</string>
     <string name="change_language">Ganti Bahasa</string>

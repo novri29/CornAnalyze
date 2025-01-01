@@ -12,9 +12,11 @@ import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 class ImageClassifierHelper(context: Context) {
-    private val interpreter: Interpreter
+    private val interpreter8020: Interpreter
+    private val interpreter7030: Interpreter
     init {
-        interpreter = Interpreter(loadModelFile(context, "CornLeafDisease8020V1.tflite"))
+        interpreter8020 = Interpreter(loadModelFile(context, "CornLeafDisease8020V1.tflite"))
+        interpreter7030 = Interpreter(loadModelFile(context, "CornLeafDisease7030V2.tflite"))
     }
 
     data class PredictionResult(
@@ -36,7 +38,15 @@ class ImageClassifierHelper(context: Context) {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    fun predictImage(bitmap: Bitmap): PredictionResult {
+    fun predictImageWith8020(bitmap: Bitmap): PredictionResult {
+        return predictImage(bitmap, interpreter8020)
+    }
+
+    fun predictImageWith7030(bitmap: Bitmap): PredictionResult {
+        return predictImage(bitmap, interpreter7030)
+    }
+
+    fun predictImage(bitmap: Bitmap, interpreter: Interpreter): PredictionResult {
         // Mengubah ukuran gambar ke 256x256
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
 
@@ -130,6 +140,7 @@ class ImageClassifierHelper(context: Context) {
 
     // Menutup interpreter ketika tidak digunakan
     fun close() {
-        interpreter.close()
+        interpreter8020.close()
+        interpreter7030.close()
     }
 }
