@@ -155,7 +155,6 @@ class ScanFragment : Fragment() {
             else -> throw IllegalArgumentException("Invalid model type")
         }
 
-
         // Mendapatkan hasil prediksi
         val label = prediction.label
         val probability = prediction.probability
@@ -164,17 +163,27 @@ class ScanFragment : Fragment() {
         val handling = prediction.handling
         val source = prediction.source
 
+        val modelInfo = when (modelType) {
+            "8020" -> "Analisa 80:20"
+            "7030" -> "Analisa 70:30"
+            else -> "Analisa"
+        }
+
         // Pastikan imageUri sudah ada
         val imageUri = Uri.parse(binding.previewImageView.tag as? String ?: "")
+
+        // Buat string hasil prediksi dengan format yang jelas
+        val hasilPrediksi = "$label ($probability%) - $modelInfo"
 
         // Pindah ke ResultsActivity
         val intent = Intent(requireContext(), ResultsActivity::class.java).apply {
             putExtra("EXTRA_GAMBAR_URI", imageUri.toString())
-            putExtra("EXTRA_HASIL_PREDIKSI", "$label ($probability%)")
+            putExtra("EXTRA_HASIL_PREDIKSI", hasilPrediksi)
             putExtra("EXTRA_DESKRIPSI", description)
             putExtra("EXTRA_PENYEBAB", cause)
             putExtra("EXTRA_SARAN", handling)
             putExtra("EXTRA_SUMBER", source)
+            putExtra("EXTRA_MODEL_TYPE", modelInfo) // Tambahkan informasi model
 
         }
         startActivity(intent)
