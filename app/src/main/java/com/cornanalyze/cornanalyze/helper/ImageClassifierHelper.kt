@@ -12,6 +12,7 @@ import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 class ImageClassifierHelper(context: Context) {
+
     private val interpreter8020: Interpreter
     private val interpreter7030: Interpreter
     init {
@@ -19,6 +20,7 @@ class ImageClassifierHelper(context: Context) {
         interpreter7030 = Interpreter(loadModelFile(context, "CornLeafDisease7030V2.tflite"))
     }
 
+    //Hasil prediksi
     data class PredictionResult(
         val label: String,
         val probability: Int,
@@ -136,7 +138,6 @@ class ImageClassifierHelper(context: Context) {
 
         return PredictionResult("Unknown", 0, "Tidak ada informasi tersedia.", "Tidak ada penyebab ditemukan.","Tidak ada langkah penanganan.", "Tidak ada sumber informasi.")
     }
-
 
     // Menutup interpreter ketika tidak digunakan
     fun close() {

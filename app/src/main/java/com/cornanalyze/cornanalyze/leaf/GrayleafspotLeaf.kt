@@ -2,7 +2,6 @@ package com.cornanalyze.cornanalyze.leaf
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
@@ -13,11 +12,8 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.cornanalyze.cornanalyze.MainActivity
 import com.cornanalyze.cornanalyze.R
-import com.cornanalyze.cornanalyze.databinding.ActivityBlightLeafBinding
 import com.cornanalyze.cornanalyze.databinding.ActivityGrayleafspotLeafBinding
 
 class GrayleafspotLeaf : AppCompatActivity() {
@@ -28,7 +24,7 @@ class GrayleafspotLeaf : AppCompatActivity() {
         binding = ActivityGrayleafspotLeafBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
-        supportActionBar?.apply {
+        supportActionBar?.apply { // Mengatur action bar
             title = "Gray Leaf Spot"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)

@@ -46,7 +46,7 @@ class HistoryFragment : Fragment(), SavePredictionAdapter.OnDeleteClickListener 
         binding.rvHistory.adapter = savePredictionAdapter
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
 
-        return binding.root // Pastikan mengembalikan root view binding
+        return binding.root // mengembalikan root view binding
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

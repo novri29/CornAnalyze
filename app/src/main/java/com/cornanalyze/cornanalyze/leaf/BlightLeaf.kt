@@ -2,24 +2,19 @@ package com.cornanalyze.cornanalyze.leaf
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.cornanalyze.cornanalyze.MainActivity
 import com.cornanalyze.cornanalyze.R
 import com.cornanalyze.cornanalyze.databinding.ActivityBlightLeafBinding
-import com.google.android.material.appbar.AppBarLayout
 
 class BlightLeaf : AppCompatActivity() {
     private lateinit var binding: ActivityBlightLeafBinding
@@ -29,7 +24,7 @@ class BlightLeaf : AppCompatActivity() {
         binding = ActivityBlightLeafBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
-        supportActionBar?.apply {
+        supportActionBar?.apply { // Mengatur action bar
             title = "Blight Leaf"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
@@ -55,7 +50,7 @@ class BlightLeaf : AppCompatActivity() {
             setDisplayShowCustomEnabled(true)
         }
     }
-
+    // Navigasi kembali ke home
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             android.R.id.home -> {

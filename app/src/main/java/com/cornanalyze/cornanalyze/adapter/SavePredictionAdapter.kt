@@ -58,7 +58,7 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
 
         fun bind(prediction: PredictionSave) {
             Glide.with(itemView.context)
-                .load(prediction.imagePath)
+                .load(prediction.image)
                 .into(imageView) // Pastikan ini ditambahkan untuk memuat gambar.
 
             resultTextView.text = prediction.result // Tetapkan hasil prediksi.
@@ -68,7 +68,7 @@ class SavePredictionAdapter(private val predictionList: List<PredictionSave>) :
                     setTitle("Konfirmasi Hapus")
                     setMessage("Apakah Anda yakin ingin menghapus item ini?")
                     setPositiveButton("Ya") { dialog, _ ->
-                        onDeleteClickListener?.onDeleteClick(adapterPosition) // Trigger event delete jika pengguna memilih "Ya".
+                        onDeleteClickListener?.onDeleteClick(adapterPosition) // Menghapus apabila menekan "YA"
                         dialog.dismiss()
                     }
                     setNegativeButton("Tidak") { dialog, _ ->

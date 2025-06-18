@@ -9,6 +9,7 @@ import com.cornanalyze.cornanalyze.R
 import com.yalantis.ucrop.UCrop
 import java.io.File
 
+//Ucrop
 object UtilsUCrop {
     fun startUCrop(
         context: Context,
@@ -19,7 +20,7 @@ object UtilsUCrop {
 
         val options = UCrop.Options().apply {
             setCompressionQuality(90)
-            setFreeStyleCropEnabled(true) // Enable free-style cropping
+            setFreeStyleCropEnabled(true) // Mengaktifkan free-style cropping
             setToolbarTitle("Crop Gambar")
             setToolbarColor(ContextCompat.getColor(context, R.color.white))
             setStatusBarColor(ContextCompat.getColor(context, R.color.white))

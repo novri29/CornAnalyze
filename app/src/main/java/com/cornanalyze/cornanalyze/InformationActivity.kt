@@ -20,7 +20,7 @@ class InformationActivity : AppCompatActivity() {
         binding = ActivityInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
-        supportActionBar?.apply {
+        supportActionBar?.apply { // Mengatur action bar
             title = "Info Aplikasi"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
@@ -41,7 +41,7 @@ class InformationActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            android.R.id.home -> {
+            android.R.id.home -> { // Mengatur tombol back ke HistoryFragment
                 val intent = Intent(this, MainActivity::class.java).apply {
                     putExtra("navigateTo", "HistoryFragment")
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP

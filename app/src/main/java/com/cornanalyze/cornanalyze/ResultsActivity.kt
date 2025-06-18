@@ -111,7 +111,7 @@ class ResultsActivity : AppCompatActivity() {
             Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
         }
     }
-
+    //waktu
     private fun getCurrentTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         return dateFormat.format(Date())
@@ -122,7 +122,7 @@ class ResultsActivity : AppCompatActivity() {
             try {
                 // Membuat entitas PredictionSave
                 val prediction = PredictionSave(
-                    imagePath = imageUri.toString(),
+                    image = imageUri.toString(),
                     result = result,
                     description = description,
                     cause = cause,

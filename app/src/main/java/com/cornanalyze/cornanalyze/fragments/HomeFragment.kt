@@ -40,8 +40,9 @@ class HomeFragment : Fragment() {
 
         // Mendapatkan tanggal saat ini
         val currentDate = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID")).format(Date())
-
         binding.tvDate.text = currentDate
+
+        //klik button
         val layouthealth: ImageButton = binding.btnHealthy
         layouthealth.setOnClickListener {
             val intent = Intent(requireContext(), HealthLeaf::class.java)
@@ -69,6 +70,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        //pindah button scan ke fragment scan
         _binding?.btnToScan?.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
             intent.putExtra("navigateTo","ScanFragment")

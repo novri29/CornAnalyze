@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class PredictionSave(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val imagePath: String,
+    val image: String,
     val result: String,
     val description: String,
     val cause: String,

@@ -20,7 +20,7 @@ class TutorialActivity : AppCompatActivity() {
         setContentView(binding.root)
         setContentView(R.layout.activity_tutorial)
         enableEdgeToEdge()
-        supportActionBar?.apply {
+        supportActionBar?.apply { // Mengatur action bar
             title = "Tutorial Penggunaan"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
@@ -41,7 +41,7 @@ class TutorialActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            android.R.id.home -> {
+            android.R.id.home -> { // Mengatur tombol back ke home
                 val intent = Intent(this, MainActivity::class.java).apply {
                     intent.putExtra("navigateTo", "HomeFragment")
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP

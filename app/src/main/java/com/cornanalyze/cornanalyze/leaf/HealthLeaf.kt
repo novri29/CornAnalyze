@@ -2,7 +2,6 @@ package com.cornanalyze.cornanalyze.leaf
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
@@ -13,7 +12,6 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-
 import com.cornanalyze.cornanalyze.MainActivity
 import com.cornanalyze.cornanalyze.R
 import com.cornanalyze.cornanalyze.databinding.ActivityHealthLeafBinding
@@ -26,7 +24,7 @@ class HealthLeaf : AppCompatActivity() {
         binding = ActivityHealthLeafBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
-        supportActionBar?.apply {
+        supportActionBar?.apply { // Mengatur action bar
             title = "Healthy"
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)

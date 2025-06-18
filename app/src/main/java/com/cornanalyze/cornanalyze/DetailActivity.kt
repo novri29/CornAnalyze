@@ -59,7 +59,7 @@ class DetailActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.waktuPemindaianTextView).text = it.date
 
                     Glide.with(this@DetailActivity)
-                        .load(it.imagePath)
+                        .load(it.image)
                         .into(findViewById(R.id.iv_detail_image))
                 }
             }

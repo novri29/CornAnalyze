@@ -5,12 +5,9 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Telephony.Mms.Part.FILENAME
 import android.util.Log
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -21,8 +18,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.cornanalyze.cornanalyze.databinding.ActivityCameraBinding
 import com.cornanalyze.cornanalyze.utils.UtilsUCrop
 import com.yalantis.ucrop.UCrop
@@ -55,6 +50,7 @@ class CameraActivity : AppCompatActivity() {
         binding.switchCamera.setOnClickListener { switchCamera() }
     }
 
+    // Putar kamera
     private fun switchCamera() {
         cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
             CameraSelector.DEFAULT_FRONT_CAMERA

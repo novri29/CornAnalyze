@@ -3,16 +3,11 @@ package com.cornanalyze.cornanalyze
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.cornanalyze.cornanalyze.databinding.ActivityMainBinding
 import com.cornanalyze.cornanalyze.fragments.HistoryFragment
 import com.cornanalyze.cornanalyze.fragments.HomeFragment
 import com.cornanalyze.cornanalyze.fragments.ScanFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
+    //Navigasi pindah halaman
     private  fun handleDirectChangeFragment() {
         val navigateTo: String? = intent.getStringExtra("navigateTo")
         if (navigateTo == "HistoryFragment") {

@@ -117,19 +117,19 @@ class ScanFragment : Fragment() {
         tfliteModel = ImageClassifierHelper(requireContext())
 
         binding.openCamera.setOnClickListener {
-            openCameraWithPermission()
+            openCameraWithPermission() // Membuka kamera
         }
 
         binding.galleryButton.setOnClickListener {
-            handleGalleryButtonClicked()
+            handleGalleryButtonClicked() // Button galeri
         }
 
         binding.analyzeButton.setOnClickListener {
-            analyzeImage("8020") // For 80:20 model
+            analyzeImage("8020") // Untuk model 80:20
         }
 
         binding.analyzeButton2.setOnClickListener {
-            analyzeImage("7030") // For 70:30 model
+            analyzeImage("7030") // Untuk model 70:30
         }
 
         binding.previewImageView.post {
@@ -184,7 +184,6 @@ class ScanFragment : Fragment() {
             putExtra("EXTRA_SARAN", handling)
             putExtra("EXTRA_SUMBER", source)
             putExtra("EXTRA_MODEL_TYPE", modelInfo) // Tambahkan informasi model
-
         }
         startActivity(intent)
     }
@@ -218,26 +217,33 @@ class ScanFragment : Fragment() {
     private val cameraActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             val croppedImageUri = result.data?.getStringExtra("CROPPED_IMAGE_URI")
-            croppedImageUri?.let {
-                val uri = Uri.parse(it)
+
+            Log.d("ScanFragment", "URI gambar dari kamera: $croppedImageUri") // Tambahkan log
+
+            if (!croppedImageUri.isNullOrEmpty()) {
+                val uri = Uri.parse(croppedImageUri)
+                binding.previewImageView.setImageURI(null) // Reset sebelum mengganti gambar baru
                 binding.previewImageView.setImageURI(uri)
-                binding.previewImageView.tag = uri.toString() // Simpan URI untuk digunakan nanti
-                binding.previewImageView.invalidate() // Refresh view
+                binding.previewImageView.tag = uri.toString()
+                binding.previewImageView.invalidate()  // Paksa refresh tampilan
+                binding.previewImageView.requestLayout()  // Paksa tata letak diperbarui
                 binding.analyzeButton.visibility = View.VISIBLE // Aktifkan tombol Analisis
+            } else {
+                Toast.makeText(requireContext(), "Gagal mendapatkan gambar dari kamera", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(requireContext(), "Failed to capture or crop image", Toast.LENGTH_SHORT).show()
         }
     }
 
-
+    // Mengambil gambar dari galeri
     private fun pickImageFromGallery() {
         pickImageGallery.launch("image/*")
     }
 
     private fun openCameraWithPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            // If permission granted, open the camera activity
+            // buka kamera apabila izin diberikan
             openCameraActivity()
         } else {
             // Request camera permission if not granted
