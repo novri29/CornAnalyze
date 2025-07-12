@@ -25,3 +25,6 @@ CornAnalyze is a practical application designed to simplify the detection of cor
 - TensorFlow Lite
 - XML Layout Design (UI)
 - Model Machine Learning (Custom corn disease detection model)
+
+<h3>Lisensi</h3>
+MIT License
