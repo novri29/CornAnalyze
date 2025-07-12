@@ -18,3 +18,10 @@ CornAnalyze is a practical application designed to simplify the detection of cor
 
 - Camera
 - Gallery
+
+<h3>Teknologi yang Digunakan</h3>
+
+- Android Studio + Kotlin
+- TensorFlow Lite
+- XML Layout Design (UI)
+- Model Machine Learning (Custom corn disease detection model)
